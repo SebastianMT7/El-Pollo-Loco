@@ -47,7 +47,7 @@ class World {
         });
 
         this.level.coins.forEach(coin => {
-            if (this.character.isColliding(coin)) {
+            if (this.character.isColliding(coin)) {                
                 this.character.collectingCoins();
                 this.coinsBar.setPercentage(this.character.coins);
             }
@@ -73,6 +73,7 @@ class World {
         this.addToMap(this.healthBar);
         this.addToMap(this.coinsBar);
         this.addToMap(this.bottlesBar);
+        
         if (this.character.x >= 2000) {
             this.addToMap(this.bossHealthBar);
         }
@@ -104,11 +105,8 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-
         mo.draw(this.ctx);
-
         mo.drawFrame(this.ctx)
-
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }

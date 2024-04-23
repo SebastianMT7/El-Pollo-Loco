@@ -37,6 +37,15 @@ class MovableObj extends DrawableObj {
             this.y < mo.y + mo.height
     }
 
+    removeCollectableObject() {
+        this.speedY = 10;
+        this.applyGravity();
+        setInterval(() => {
+            this.x += 5;
+            this.y += 10;
+        }, 25);
+    }
+
     collectingCoins() {
         this.coins += 20;
         if (this.coins >= 100) {
