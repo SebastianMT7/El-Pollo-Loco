@@ -47,9 +47,11 @@ class World {
         });
 
         this.level.coins.forEach(coin => {
-            if (this.character.isColliding(coin)) {                
+            if (this.character.isColliding(coin)) {
                 this.character.collectingCoins();
                 this.coinsBar.setPercentage(this.character.coins);
+                let coinIndex = this.level.coins.indexOf(coin);
+                this.level.coins.splice(coinIndex, 1);
             }
         });
 
@@ -57,6 +59,8 @@ class World {
             if (this.character.isColliding(bottle)) {
                 this.character.collectingBottles();
                 this.bottlesBar.setPercentage(this.character.bottles);
+                let bottleIndex = this.level.bottles.indexOf(bottle);
+                this.level.bottles.splice(bottleIndex, 1);
             }
         });
     }
@@ -73,11 +77,11 @@ class World {
         this.addToMap(this.healthBar);
         this.addToMap(this.coinsBar);
         this.addToMap(this.bottlesBar);
-        
+
         if (this.character.x >= 2000) {
             this.addToMap(this.bossHealthBar);
         }
-        
+
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.clouds);

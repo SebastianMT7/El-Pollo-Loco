@@ -40,7 +40,10 @@ class Character extends MovableObj {
         '../img/2_character_pepe/5_dead/D-57.png'
     ];
     world;
-    walking_sound = new Audio('audio/walking.mp3');
+    walk_sound = new Audio('audio/walking.mp3');
+    jump_sound = new Audio('audio/jump.mp3');
+    hurt_sound = new Audio('audio/hurt.mp3');
+
 
     constructor() {
         super().loadImage('../img/2_character_pepe/2_walk/W-21.png');
@@ -54,22 +57,22 @@ class Character extends MovableObj {
 
     animate() {
         setInterval(() => {
-            this.walking_sound.pause();
+            this.walk_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                this.walking_sound.play();
+                this.walk_sound.play();
             }
 
             if (this.world.keyboard.LEFT && this.x > 100) {
                 this.moveLeft();
                 this.otherDirection = true;
-                this.walking_sound.play();
+                this.walk_sound.play();
             }
 
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
-                //this.jumping_sound.play();
+                this.jump_sound.play();
             }
 
             if (this.world.keyboard.THROW) {
@@ -82,8 +85,11 @@ class Character extends MovableObj {
 
         setInterval(() => {
             //%(modulul) ist die bezeichnunge für den mathematischen Rest
+            
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+                this.hurt_sound.play();             
+                                
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             }

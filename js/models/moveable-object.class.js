@@ -5,9 +5,20 @@ class MovableObj extends DrawableObj {
     speedY = 0;
     accleration = 2.5;
     health = 100;
-    coins = 0; 
+    coins = 0;
     bottles = 0;
     lastHit = 0;
+
+    collectBottle_sound = new Audio('audio/collecting_bottle.mp3');
+    collectCoin_sound = new Audio('audio/collecting_coin.mp3');
+    breakBottle_sound = new Audio('audio/breaking_bottle.mp3');
+
+    offset = {
+		top: 0,
+		bottom: 0,
+		left: 0,
+		right: 0,
+	};
 
     applyGravity(img) {
         setInterval(() => {
@@ -37,27 +48,20 @@ class MovableObj extends DrawableObj {
             this.y < mo.y + mo.height
     }
 
-    removeCollectableObject() {
-        this.speedY = 10;
-        this.applyGravity();
-        setInterval(() => {
-            this.x += 5;
-            this.y += 10;
-        }, 25);
-    }
-
     collectingCoins() {
+        this.collectCoin_sound.play();
         this.coins += 20;
         if (this.coins >= 100) {
             this.coins = 100;
-        } 
+        }
     }
 
-    collectingBottles() {
-        this.bottles += 20;
-        if (this.bottles >= 100) {
-            this.bottles = 100;
-        } 
+    collectingBottles() {        
+        if (this.bottles <= 100 || !this.bottles == 100) {
+            this.collectBottle_sound.play();
+            this.bottles += 20;
+            console.log('bottles',this.bottles)
+          }
     }
 
     hit() {
