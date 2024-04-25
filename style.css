@@ -3,14 +3,16 @@
     src: url('fonts/zabars.ttf') format('truetype');
 }
 
-body{
+body {
+    height: 100vh;
+    padding-top: 50px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     font-family: 'zabras', Arial, Helvetica, sans-serif;
     background-image: url('img/5_background/body_background.jpg');
-    background-position: top;
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -25,4 +27,33 @@ h1 {
 
 canvas {
     background-color: black;
+    border-radius: 20px;
+    border: 1px solid rgba(157, 155, 155, 0.5);
+    ;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.mainContent {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.iconBar {
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+    padding-top: 20px;
+    
+    img {
+        height: 24px;
+    }
+
+    img:hover {
+        cursor: pointer;
+        transform: scale(1.2);
+    }
 }

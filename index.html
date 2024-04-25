@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" translate="no">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,13 +30,25 @@
 
     <title>El Pollo Loco</title>
 </head>
+
 <body onload="init()">
     <h1>El Pollo Loco</h1>
+    <div id></div>
 
-    <canvas id="canvas" width="720" height="480">
-
-
-    </canvas>
-    
+    <div class="mainContent">
+        <div class="iconBar">
+            <div>
+                <img src="../img/sound_On.png" alt="sound-on">
+            </div>
+            <div>
+                <img src="../img/sound_Off.png" alt="sound-off">
+            </div>
+            <div>
+                <img src="../img/fullscreen.png" alt="fullScreen">
+            </div>
+        </div>
+        <canvas id="canvas" width="720" height="480"></canvas>
+    </div>
 </body>
+
 </html>

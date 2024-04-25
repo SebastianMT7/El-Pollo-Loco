@@ -39,13 +39,21 @@ class World {
     }
 
     checkCollisions() {
+        this.collisionEnemie();
+        this.collisionCoins();
+        this.collisionBottles();
+    }
+
+    collisionEnemie(){
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
                 this.character.hit();
                 this.healthBar.setPercentage(this.character.health);
             }
         });
+    }
 
+    collisionCoins(){
         this.level.coins.forEach(coin => {
             if (this.character.isColliding(coin)) {
                 this.character.collectingCoins();
@@ -54,7 +62,9 @@ class World {
                 this.level.coins.splice(coinIndex, 1);
             }
         });
+    }
 
+    collisionBottles(){
         this.level.bottles.forEach(bottle => {
             if (this.character.isColliding(bottle)) {
                 this.character.collectingBottles();
@@ -64,16 +74,36 @@ class World {
             }
         });
     }
-
+    
     //draw wird immer wieder ausgeführt
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
-
         this.ctx.translate(-this.camera_x, 0);
         //-------Space for fixed object--------
+        this.addLevelBars();
+        this.ctx.translate(this.camera_x, 0);
+        this.addLevelObjects();
+        this.ctx.translate(-this.camera_x, 0);
+
+        let self = this;
+        requestAnimationFrame(function () {
+            self.draw(); //self wird erstellt, weil er hier (warum auch immer) .this nicht kennt
+        });
+    }
+
+    addLevelObjects(){
+        this.addObjectsToMap(this.level.clouds);
+        this.addToMap(this.character)
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
+    }
+
+    addLevelBars(){
         this.addToMap(this.healthBar);
         this.addToMap(this.coinsBar);
         this.addToMap(this.bottlesBar);
@@ -81,22 +111,6 @@ class World {
         //if (this.character.x >= 2000) {
             this.addToMap(this.bossHealthBar);
         //}
-
-        this.ctx.translate(this.camera_x, 0);
-
-        this.addObjectsToMap(this.level.clouds);
-        this.addToMap(this.character)
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.throwableObjects);
-        this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.bottles);
-        this.ctx.translate(-this.camera_x, 0);
-
-        let self = this;
-        requestAnimationFrame(function () {
-            self.draw(); //self wird erstellt, weil er hier (warum auch immer) .this nicht kennt
-
-        });
     }
 
     addObjectsToMap(objects) {

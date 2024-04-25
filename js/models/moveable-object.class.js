@@ -40,12 +40,12 @@ class MovableObj extends DrawableObj {
         }
     }
 
-    //character isColliding (Chicken)
+    //character isColliding
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left && // R -> L
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && // B -> T
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right && // L -> R
+            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom; // T -> B
     }
 
     collectingCoins() {
@@ -84,7 +84,7 @@ class MovableObj extends DrawableObj {
     }
 
     playAnimation(images) {
-        //walk animation
+        // zB walk animation
         let i = this.currentImage % images.length; //zB i= 5 % 6; => 0,Rest 5 (% ist geteilt durch)
         // i= 7 % 6; => 1,Rest 1 
         // i = 0,1,2,3,4,5,0,1,2,3,4,5,0
