@@ -7,11 +7,7 @@ class MovableObj extends DrawableObj {
     health = 100;
     coins = 0;
     bottles = 0;
-    lastHit = 0;
-
-    collectBottle_sound = new Audio('audio/collecting_bottle.mp3');
-    collectCoin_sound = new Audio('audio/collecting_coin.mp3');
-    breakBottle_sound = new Audio('audio/breaking_bottle.mp3');
+    lastHit = 0;        
 
     offset = {
 		top: 0,
@@ -48,23 +44,7 @@ class MovableObj extends DrawableObj {
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom; // T -> B
     }
 
-    collectingCoins() {
-        this.collectCoin_sound.play();
-        this.coins += 20;
-        if (this.coins >= 100) {
-            this.coins = 100;
-        }
-    }
-
-    collectingBottles() {        
-        if (this.bottles <= 100 || !this.bottles == 100) {
-            this.collectBottle_sound.play();
-            this.bottles += 20;
-            console.log('bottles',this.bottles)
-          }
-    }
-
-    hit() {
+     hit() {
         this.health -= 5;
         if (this.health < 0) {
             this.health = 0;

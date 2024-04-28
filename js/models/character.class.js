@@ -3,6 +3,12 @@ class Character extends MovableObj {
     height = 370;
     width = 130;
     speed = 10;
+    offset = {
+		top: 140,
+		bottom: 15,
+		left: 20,
+		right: 20,
+	};
     IMAGES_WALKING = [
         '../img/2_character_pepe/2_walk/W-21.png',
         '../img/2_character_pepe/2_walk/W-22.png',
@@ -44,13 +50,6 @@ class Character extends MovableObj {
     jump_sound = new Audio('audio/jump.mp3');
     hurt_sound = new Audio('audio/hurt.mp3');
 
-    offset = {
-		top: 140,
-		bottom: 15,
-		left: 20,
-		right: 20,
-	};
-
 
     constructor() {
         super().loadImage('../img/2_character_pepe/2_walk/W-21.png');
@@ -80,11 +79,6 @@ class Character extends MovableObj {
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
                 this.jump_sound.play();
-            }
-
-            if (this.world.keyboard.THROW) {
-                this.throwBottle();
-                //this.throwing_sound.play();
             }
 
             this.world.camera_x = -this.x + 100;
