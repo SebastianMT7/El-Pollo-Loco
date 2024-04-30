@@ -57,9 +57,9 @@ class World {
             if (this.character.isColliding(enemy)) {
                 
                 if (this.character.isAboveGround()) {
-                    enemy.health = 0;
-                    let chickenIndex = this.level.enemies.indexOf(enemy);
-                    this.level.enemies.splice(chickenIndex, 1);
+                    enemy.health = 0;                    
+                    let index = this.level.enemies.indexOf(enemy);
+                    this.level.enemies.splice(index, 1);                    
                 }
                 else{
                 this.character.hit();
