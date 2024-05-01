@@ -1,5 +1,6 @@
 class World {
     character = new Character();
+    endboss = new Endboss();
     level = level1;
     canvas;
     ctx;
@@ -12,6 +13,7 @@ class World {
     throwableObjects = [];
     coinsInventory = 0;
     bottlesInventory = 0;
+
 
     collectBottle_sound = new Audio('audio/collecting_bottle.mp3');
     collectCoin_sound = new Audio('audio/collecting_coin.mp3');
@@ -55,15 +57,15 @@ class World {
     collisionEnemie() {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
-                
+
                 if (this.character.isAboveGround()) {
-                    enemy.health = 0;                    
+                    enemy.health = 0;
                     let index = this.level.enemies.indexOf(enemy);
-                    this.level.enemies.splice(index, 1);                    
+                    this.level.enemies.splice(index, 1);
                 }
-                else{
-                this.character.hit();
-                this.healthBar.setPercentage(this.character.health);
+                else {
+                    this.character.hit();
+                    this.healthBar.setPercentage(this.character.health);
                 }
             }
         });
@@ -94,7 +96,7 @@ class World {
                 this.bottlesBar.setPercentage(this.bottlesInventory);
                 let bottleIndex = this.level.bottles.indexOf(bottle);
                 this.level.bottles.splice(bottleIndex, 1);
-                console.log('bottlesInventory',this.bottlesInventory) //wieder löschen!!
+                console.log('bottlesInventory', this.bottlesInventory) //wieder löschen!!
             }
         });
     }
@@ -120,7 +122,8 @@ class World {
 
     addLevelObjects() {
         this.addObjectsToMap(this.level.clouds);
-        this.addToMap(this.character)
+        this.addToMap(this.character);
+        this.addToMap(this.endboss);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.coins);
@@ -131,11 +134,19 @@ class World {
         this.addToMap(this.healthBar);
         this.addToMap(this.coinsBar);
         this.addToMap(this.bottlesBar);
-
-        //if (this.character.x >= 2000) {
-        this.addToMap(this.bossHealthBar);
-        //}
+        this.addBossHealthBar();
+  
     }
+
+    addBossHealthBar(){
+        if (this.character.x >= 2600) {
+            this.endboss.firstContact = true;            
+        }
+        if (this.endboss.firstContact == true) {
+            this.addToMap(this.bossHealthBar);
+        } 
+    }
+
 
     addObjectsToMap(objects) {
         objects.forEach(o => {
