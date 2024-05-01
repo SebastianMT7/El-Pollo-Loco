@@ -50,6 +50,7 @@ class World {
 
     checkCollisions() {
         this.collisionEnemie();
+        this.collisionEndboss();
         this.collisionCoins();
         this.collisionBottles();
     }
@@ -57,7 +58,6 @@ class World {
     collisionEnemie() {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
-
                 if (this.character.isAboveGround()) {
                     enemy.health = 0;
                     let index = this.level.enemies.indexOf(enemy);
@@ -69,6 +69,14 @@ class World {
                 }
             }
         });
+    }
+
+    collisionEndboss() {
+        if (this.character.isColliding(this.endboss)) {
+            console.log('collide', 'boss')
+            this.character.hit();
+            this.healthBar.setPercentage(this.character.health);
+        }
     }
 
     collisionCoins() {
@@ -135,16 +143,15 @@ class World {
         this.addToMap(this.coinsBar);
         this.addToMap(this.bottlesBar);
         this.addBossHealthBar();
-  
     }
 
-    addBossHealthBar(){
+    addBossHealthBar() {
         if (this.character.x >= 2600) {
-            this.endboss.firstContact = true;            
+            this.endboss.firstContact = true;
         }
         if (this.endboss.firstContact == true) {
             this.addToMap(this.bossHealthBar);
-        } 
+        }
     }
 
 

@@ -4,11 +4,11 @@ class Character extends MovableObj {
     width = 130;
     speed = 10;
     offset = {
-		top: 140,
-		bottom: 15,
-		left: 20,
-		right: 20,
-	};
+        top: 140,
+        bottom: 15,
+        left: 20,
+        right: 20,
+    };
     IMAGES_IDLE = [
         '../img/2_character_pepe/1_idle/idle/I-1.png',
         '../img/2_character_pepe/1_idle/idle/I-2.png',
@@ -88,6 +88,11 @@ class Character extends MovableObj {
     }
 
     animate() {
+        this.moveCharacter();
+        this.animateCharakter();
+    }
+
+    moveCharacter(){
         setInterval(() => {
             this.walk_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -109,27 +114,41 @@ class Character extends MovableObj {
 
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
+    }
 
+    animateCharakter(){
         setInterval(() => {
             //%(modulul) ist die bezeichnunge für den mathematischen Rest
-            
+
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-                this.hurt_sound.play();             
-                                
+                this.hurt_sound.play();
+
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             }
             else if (this.isAboveGround()) {
+                this.updateMoveTime();
                 this.playAnimation(this.IMAGES_JUMPING);
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.updateMoveTime();
+                this.playAnimation(this.IMAGES_WALKING);
+            } else if (this.sleepTime()) {
+                this.playAnimation(this.IMAGES_LONG_IDLE);
             } else {
-
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.playAnimation(this.IMAGES_WALKING);
-                }
+                this.playAnimation(this.IMAGES_IDLE);
             }
         }, 100);
+    }
 
+    updateMoveTime(){
+        let currentTime = new Date().getTime();
+        this.lastMoveTime = currentTime;
+    }
+
+    sleepTime() {
+        let passedTime = new Date().getTime() - this.lastMoveTime;
+        return passedTime > 5000;
     }
 
     jump() {

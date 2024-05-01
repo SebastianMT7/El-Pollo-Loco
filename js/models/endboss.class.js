@@ -2,13 +2,14 @@ class Endboss extends MovableObj {
     y = 5;
     height = 450;
     width = 350;
+    health = 100;
+    firstContact = false;
     offset = {
         top: 75,
         bottom: 15,
         left: 10,
         right: 10,
     };
-    firstContact = false;
     IMAGES_ALERT = [
         '../img/4_enemie_boss_chicken/2_alert/G5.png',
         '../img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -54,13 +55,60 @@ class Endboss extends MovableObj {
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 3150;
+        this.x = 3000;
         this.animate();
     }
 
     animate() {
-        setInterval(() => {
+        this.spawnBoss();
+        this.hurtBoss();
+        this.deadBoss();
+    }
+
+    hurtBoss() {
+        this.hurtBossIntervall = setInterval(() => {
+            if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+                //this.hurt_sound.play();
+            }
+        }, 100 / 10);
+    }
+
+    deadBoss(){
+        this.deadBossIntervall = setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+                //this.dead_sound.play();
+            }
+        }, 100 / 10);
+    }
+
+    spawnBoss() {
+        this.alertBoss = setInterval(() => {
             this.playAnimation(this.IMAGES_ALERT);
+        }, 150)
+
+        this.checkfirstContact = setInterval(() => {
+            if (this.firstContact == true) {
+                console.log('contact', 'true')
+                setTimeout(() => {
+                    clearInterval(this.alertBoss);
+                    this.moveEndboss();
+                }, 1000);
+
+            }
         }, 150);
     }
+
+    moveEndboss() {
+        clearInterval(this.checkfirstContact);
+        this.walkBossAnimation = setInterval(() => {
+            this.playAnimation(this.IMAGES_WALK);
+        }, 1000);
+
+        this.walkBoss = setInterval(() => {
+            this.moveLeft();
+        }, 1000 / 60);
+    }
+
 }
