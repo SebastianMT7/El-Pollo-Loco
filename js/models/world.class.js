@@ -56,19 +56,28 @@ class World {
     }
 
     collisionEnemie() {
-        this.level.enemies.forEach(enemy => {
+        this.level.enemies.forEach(enemy => {            
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
-                    enemy.health = 0;
-                    let index = this.level.enemies.indexOf(enemy);
-                    this.level.enemies.splice(index, 1);
+                    deleteEnemy(enemy);
                 }
                 else {
                     this.character.hit();
                     this.healthBar.setPercentage(this.character.health);
+                    setTimeout(() => {
+                        
+                    }, 2000);
                 }
             }
         });
+    }
+
+    deleteEnemy(enemy){
+        enemy.health = 0;
+        setTimeout(() => {
+            let index = this.level.enemies.indexOf(enemy);
+            this.level.enemies.splice(index, 1);
+        }, 1500);
     }
 
     collisionEndboss() {
@@ -86,6 +95,7 @@ class World {
                 if (this.coinsInventory >= 100) {
                     this.coinsInventory = 100;
                 }
+                this.collectCoin_sound.play();
                 this.coinsBar.setPercentage(this.coinsInventory);
                 let coinIndex = this.level.coins.indexOf(coin);
                 this.level.coins.splice(coinIndex, 1);
@@ -115,11 +125,11 @@ class World {
 
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addLevelObjects();
         this.ctx.translate(-this.camera_x, 0);
         //-------Space for fixed object--------
         this.addLevelBars();
         this.ctx.translate(this.camera_x, 0);
-        this.addLevelObjects();
         this.ctx.translate(-this.camera_x, 0);
 
         let self = this;

@@ -137,9 +137,16 @@ class Character extends MovableObj {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
+                // handleIdleAnimations();
             }
         }, 100);
     }
+
+    // handleIdleAnimations() {
+    //     this.timeSinceLastAction = new Date().getTime() - this.lastAction;
+    //     this.playAnimation(this.timeSinceLastAction > 2000 ? this.IMAGES_IDLE : this.IMAGES_WAITING);
+    // }
+
 
     updateMoveTime(){
         let currentTime = new Date().getTime();

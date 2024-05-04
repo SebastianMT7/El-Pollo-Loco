@@ -23,29 +23,33 @@ class Chicken extends MovableObj {
     constructor() {
         super().loadImage('../img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
-
+        this.loadImages(this.IMAGES_DEAD);
         this.x = 500 + Math.random() * 1100;
         this.speed = 0.15 + Math.random() * 0.5; //Math.Random ist immer eine zufälluge Zahl zwischen 0 und 1 deshalb  *0,25
         this.animate();
     }
 
     animate() {
+        this.moveChicken();
+        this.checkDead();
+    }
+
+    moveChicken() {
         this.walkingChicken = setInterval(() => {
             this.moveLeft();
         }, 1000 / 60); //besagt das das Bild 60x pro sek angezeigt wird (60fps)
 
-        this.walkingChickenAnimation = setInterval(() => { //%(modulul) ist die bezeichnunge für den mathematischen Rest
+        this.walkingChickenAnimation = setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 150);
+    }
 
+    checkDead() {
         setInterval(() => {
             if (this.isDead()) {
                 this.loadImage(this.IMAGES_DEAD);
                 clearInterval(this.walkingChicken)
-                clearInterval(this.walkingChickenAnimation)
-                //setTimeout(() => {
-                //    this.removeObject();
-                //}, 1500);
+                clearInterval(this.walkingChickenAnimation)                
             };
         }, 200);
     }
