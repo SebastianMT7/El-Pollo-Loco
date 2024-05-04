@@ -7,23 +7,20 @@ class MovableObj extends DrawableObj {
     health = 100;
     coins = 0;
     bottles = 0;
-    lastHit = 0;  
-          
-    offset = {
-		top: 0,
-		bottom: 0,
-		left: 0,
-		right: 0,
-	};
+    lastHit = 0;
 
-    applyGravity(img) {
+    offset = {
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+    };
+
+    applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
-                if ((this instanceof ThrowableObj)) {
-                    this.playAnimation(img); //nur beim werfen nicht beim springen
-                }
-                this.y -= this.speedY;                
-                this.speedY -= this.accleration;                
+                this.y -= this.speedY;
+                this.speedY -= this.accleration;
             }
             if (this.y > 72 && this instanceof Character) {
                 this.y = 72;
@@ -47,7 +44,7 @@ class MovableObj extends DrawableObj {
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom; // T -> B
     }
 
-     hit() {
+    hit() {
         this.health -= 5;
         if (this.health < 0) {
             this.health = 0;

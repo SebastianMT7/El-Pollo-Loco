@@ -130,11 +130,14 @@ class Character extends MovableObj {
             else if (this.isAboveGround()) {
                 this.updateMoveTime();
                 this.playAnimation(this.IMAGES_JUMPING);
+
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.updateMoveTime();
                 this.playAnimation(this.IMAGES_WALKING);
+
             } else if (this.sleepTime()) {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
+                
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
                 // handleIdleAnimations();

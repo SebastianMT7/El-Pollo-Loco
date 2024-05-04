@@ -35,11 +35,11 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            this.throwBottle();
+            this.checkThrowBottle();
         }, 200);
     }
 
-    throwBottle() {
+    checkThrowBottle() {
         if (this.keyboard.D && this.bottlesInventory > 0) {
             let bottle = new ThrowableObj(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
@@ -53,10 +53,47 @@ class World {
         this.collisionEndboss();
         this.collisionCoins();
         this.collisionBottles();
+        this.collisionThrowableObj();
+    }
+
+    collisionThrowableObj() {
+        this.checkCollideWithEnemy();
+        this.checkCollideWithGround();
+    }
+
+    checkCollideWithEnemy() { //funktioniert gerade nur wenn man nicht springt
+        this.throwableObjects.forEach((bottle, indexBottle) => {
+            this.level.enemies.forEach((enemy, indexEnenmy) => {
+                if (this.throwableObjects[indexBottle].isColliding(enemy)) {
+                    this.throwableObjects[indexBottle].animateSplash();
+                    console.log('hit', 'splash')
+                    this.deleteEnemy(enemy);
+                    setTimeout(() => {
+                        this.throwableObjects.splice(index, 1);
+                    }, 500)
+                }
+            });
+        });
+    }
+
+    checkCollideWithGround() {
+        this.throwableObjects.forEach(bottle => {
+            console.log('y', bottle.y)
+            if (bottle.y >= 263) {
+                bottle.speedY = 0;
+                //clearInterval(bottle.throwBottle);
+                //console.log('x', bottle.x)
+                //console.log('splash', 'bottle')
+                //bottle.animateSplash();
+                // setTimeout(() => {
+                //     this.throwableObjects.splice(index, 1);
+                // }, 500);
+            }
+        });
     }
 
     collisionEnemie() {
-        this.level.enemies.forEach(enemy => {            
+        this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
                     this.deleteEnemy(enemy);
@@ -70,7 +107,7 @@ class World {
         });
     }
 
-    deleteEnemy(enemy){
+    deleteEnemy(enemy) {
         enemy.health = 0;
         setTimeout(() => {
             let index = this.level.enemies.indexOf(enemy);
@@ -80,7 +117,6 @@ class World {
 
     collisionEndboss() {
         if (this.character.isColliding(this.endboss)) {
-            console.log('collide', 'boss')
             this.character.hit();
             this.healthBar.setPercentage(this.character.health);
         }
