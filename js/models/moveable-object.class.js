@@ -9,7 +9,6 @@ class MovableObj extends DrawableObj {
     bottles = 0;
     lastHit = 0;  
           
-
     offset = {
 		top: 0,
 		bottom: 0,
@@ -23,8 +22,11 @@ class MovableObj extends DrawableObj {
                 if ((this instanceof ThrowableObj)) {
                     this.playAnimation(img); //nur beim werfen nicht beim springen
                 }
-                this.y -= this.speedY;
-                this.speedY -= this.accleration;
+                this.y -= this.speedY;                
+                this.speedY -= this.accleration;                
+            }
+            if (this.y > 72 && this instanceof Character) {
+                this.y = 72;
             }
         }, 1000 / 25);
     }

@@ -1,7 +1,6 @@
 class Chicken extends MovableObj {
-    y = 350;
-    height = 80;
-    width = 90;
+    multiplier = Math.random() * 50;
+    speedY = 10;
     health = 100;
     offset = {
         top: 0,
@@ -24,9 +23,12 @@ class Chicken extends MovableObj {
         super().loadImage('../img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 500 + Math.random() * 1100;
+        this.x = 500 + Math.random() * 2000;
+        this.y = 350 - this.multiplier;
+        this.height = 80 + this.multiplier;
         this.speed = 0.15 + Math.random() * 0.5; //Math.Random ist immer eine zufälluge Zahl zwischen 0 und 1 deshalb  *0,25
         this.animate();
+        console.log('height', this.y)
     }
 
     animate() {
@@ -48,9 +50,12 @@ class Chicken extends MovableObj {
         setInterval(() => {
             if (this.isDead()) {
                 this.loadImage(this.IMAGES_DEAD);
-                clearInterval(this.walkingChicken)
-                clearInterval(this.walkingChickenAnimation)                
+                setTimeout(() => {
+                    this.y += this.speedY;
+                    clearInterval(this.walkingChicken)
+                    clearInterval(this.walkingChickenAnimation)
+                }, 600);
             };
-        }, 200);
+        }, 50);
     }
 }

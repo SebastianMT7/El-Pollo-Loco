@@ -59,14 +59,12 @@ class World {
         this.level.enemies.forEach(enemy => {            
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
-                    deleteEnemy(enemy);
+                    this.deleteEnemy(enemy);
+                    this.character.jump();
                 }
                 else {
                     this.character.hit();
                     this.healthBar.setPercentage(this.character.health);
-                    setTimeout(() => {
-                        
-                    }, 2000);
                 }
             }
         });

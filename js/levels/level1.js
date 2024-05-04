@@ -5,8 +5,8 @@ const level1 = new Level(
         new Bottle(800),
         new Bottle(1000),
         new Bottle(1300),
-        new Bottle(1600),
-        new Bottle(2000)
+        new Bottle(1800),
+        new Bottle(2100)
 
     ],
 
@@ -14,14 +14,19 @@ const level1 = new Level(
         new Coin(500),
         new Coin(700),
         new Coin(1000),
-        new Coin(1500),
-        new Coin(1700)
+        new Coin(1300),
+        new Coin(1700),
+        new Coin(1950),
+        new Coin(2200)
     ],
     
     [
         new Chicken(),
         new Chicken(),
         new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new ChickenSmall(),
         new ChickenSmall(),
         new ChickenSmall(),
         new ChickenSmall(),
