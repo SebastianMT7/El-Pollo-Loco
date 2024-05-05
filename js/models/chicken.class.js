@@ -50,11 +50,11 @@ class Chicken extends MovableObj {
         setInterval(() => {
             if (this.isDead()) {
                 this.loadImage(this.IMAGES_DEAD);
+                clearInterval(this.walkingChickenAnimation)
+                clearInterval(this.walkingChicken)
                 setTimeout(() => {
                     this.y += this.speedY;
-                    clearInterval(this.walkingChicken)
-                    clearInterval(this.walkingChickenAnimation)
-                }, 600);
+                }, 500);
             };
         }, 50);
     }

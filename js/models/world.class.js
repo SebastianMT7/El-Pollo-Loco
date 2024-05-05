@@ -96,6 +96,7 @@ class World {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
+                    //debugger;
                     this.deleteEnemy(enemy);
                     this.character.jump();
                 }
