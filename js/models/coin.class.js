@@ -1,8 +1,8 @@
 class Coin extends MovableObj {
 
     IMAGES_GROUND = [
-        '../img/8_coin/coin_1.png',
-        '../img/8_coin/coin_2.png'
+        'img/8_coin/coin_1.png',
+        'img/8_coin/coin_2.png'
     ];
 
     height = 60;
@@ -15,7 +15,7 @@ class Coin extends MovableObj {
 	};
 
     constructor(x) {
-        super().loadImage('../img/8_coin/coin_1.png');
+        super().loadImage('img/8_coin/coin_1.png');
         this.loadImages(this.IMAGES_GROUND);
         this.x = x;
         this.y = 30 + Math.random() * 200;
