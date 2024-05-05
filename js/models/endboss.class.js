@@ -71,14 +71,15 @@ class Endboss extends MovableObj {
                 this.playAnimation(this.IMAGES_HURT);
                 //this.hurt_sound.play();
             }
-        }, 100 / 10);
+        }, 500 / 10);
     }
 
     deadBoss(){
         this.deadBossIntervall = setInterval(() => {
             if (this.isDead()) {
+                clearInterval(this.moveEndboss);
                 this.playAnimation(this.IMAGES_DEAD);
-                //this.dead_sound.play();
+                //this.dead_sound.play();                
             }
         }, 100 / 10);
     }
@@ -95,7 +96,6 @@ class Endboss extends MovableObj {
                     clearInterval(this.alertBoss);
                     this.moveEndboss();
                 }, 1000);
-
             }
         }, 150);
     }

@@ -58,6 +58,7 @@ class World {
 
     collisionThrowableObj() {
         this.checkCollideWithEnemy();
+        this.checkCollideWithEndboss();
         this.checkCollideWithGround();
     }
 
@@ -74,6 +75,17 @@ class World {
                 }
             });
         });
+    }
+
+    checkCollideWithEndboss(){
+        this.throwableObjects.forEach((bottle, indexBottle) => {
+            if (this.throwableObjects[indexBottle].isColliding(this.endboss)) {
+                this.endboss.hit();
+                this.bossHealthBar.setPercentage(this.endboss.health);
+            } 
+        });
+
+
     }
 
     checkCollideWithGround() {
