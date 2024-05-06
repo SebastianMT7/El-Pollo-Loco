@@ -46,7 +46,6 @@ class ThrowableObj extends MovableObj {
 
     animateSplash() {
         clearInterval(this.throwBottle);        
-        this.playAnimation(this.IMAGES_SPLASH); 
-        
+        this.playAnimation(this.IMAGES_SPLASH);         
     }
 }

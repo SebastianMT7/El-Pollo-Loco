@@ -34,7 +34,9 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
+            this.checkCollisions();            
+        }, 50);
+        setInterval(() => {
             this.checkThrowBottle();
         }, 200);
     }
@@ -64,14 +66,16 @@ class World {
 
     checkCollideWithEnemy() { //funktioniert gerade nur wenn man nicht springt
         this.throwableObjects.forEach((bottle, indexBottle) => {
-            this.level.enemies.forEach((enemy, indexEnenmy) => {
+            this.level.enemies.forEach((enemy, indexEnemy) => {            
+                    //debugger;
                 if (this.throwableObjects[indexBottle].isColliding(enemy)) {
-                    this.throwableObjects[indexBottle].animateSplash();
+                    //this.throwableObjects[indexBottle].animateSplash();
                     console.log('hit', 'splash')
                     this.deleteEnemy(enemy);
-                    setTimeout(() => {
-                        this.throwableObjects.splice(index, 1);
-                    }, 500)
+                    console.log('number', this.throwableObjects)
+                   
+                        this.throwableObjects.splice(indexBottle, 1);
+                    
                 }
             });
         });
@@ -108,7 +112,6 @@ class World {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
-                    //debugger;
                     this.deleteEnemy(enemy);
                     this.character.jump();
                 }
@@ -161,7 +164,6 @@ class World {
                 this.bottlesBar.setPercentage(this.bottlesInventory);
                 let bottleIndex = this.level.bottles.indexOf(bottle);
                 this.level.bottles.splice(bottleIndex, 1);
-                console.log('bottlesInventory', this.bottlesInventory) //wieder löschen!!
             }
         });
     }
