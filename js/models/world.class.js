@@ -18,6 +18,7 @@ class World {
     collectBottle_sound = new Audio('audio/collecting_bottle.mp3');
     collectCoin_sound = new Audio('audio/collecting_coin.mp3');
     breakBottle_sound = new Audio('audio/breaking_bottle.mp3');
+    bossAppear_sound = new Audio('audio/boss_appears.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -34,7 +35,7 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();            
+            this.checkCollisions();
         }, 50);
         setInterval(() => {
             this.checkThrowBottle();
@@ -59,51 +60,67 @@ class World {
     }
 
     collisionThrowableObj() {
-        this.checkCollideWithEnemy();
-        this.checkCollideWithEndboss();
-        this.checkCollideWithGround();
+        this.checkBottleCollideWithEnemy();
+        this.checkBottleCollideWithEndboss();
+        this.checkBottleCollideWithGround();
     }
 
-    checkCollideWithEnemy() { //funktioniert gerade nur wenn man nicht springt
-        this.throwableObjects.forEach((bottle, indexBottle) => {
-            this.level.enemies.forEach((enemy, indexEnemy) => {            
-                    //debugger;
-                if (this.throwableObjects[indexBottle].isColliding(enemy)) {
-                    //this.throwableObjects[indexBottle].animateSplash();
-                    console.log('hit', 'splash')
+    // checkBottleCollideWithEnemy() { //funktioniert gerade nur wenn man nicht springt
+    //     this.throwableObjects.forEach((bottle, indexBottle) => {
+    //         this.level.enemies.forEach((enemy, indexEnemy) => {            
+    //                 //debugger;
+    //             if (this.throwableObjects[indexBottle].isColliding(enemy)) {
+    //                 //this.throwableObjects[indexBottle].animateSplash();
+    //                 console.log('hit', 'splash')
+    //                 this.deleteEnemy(enemy);
+    //                 console.log('number', this.throwableObjects)
+
+    //                     this.throwableObjects.splice(indexBottle, 1);
+
+    //             }
+    //         });
+    //     });
+    // }
+
+    checkBottleCollideWithEnemy() {
+        this.throwableObjects.forEach((bottle) => {
+            this.level.enemies.forEach((enemy) => {
+                //debugger;
+                if (bottle.isColliding(enemy)) {
+                    bottle.animateSplash();
+                    this.breakBottle_sound.play();
+                    //console.log('hit', 'splash')
                     this.deleteEnemy(enemy);
-                    console.log('number', this.throwableObjects)
-                   
-                        this.throwableObjects.splice(indexBottle, 1);
-                    
+                    //console.log('number', this.throwableObjects)                   
+                    this.throwableObjects.splice(bottle, 1);
                 }
             });
         });
     }
 
-    checkCollideWithEndboss(){
-        this.throwableObjects.forEach((bottle, indexBottle) => {
-            if (this.throwableObjects[indexBottle].isColliding(this.endboss)) {
+    checkBottleCollideWithEndboss() {
+        this.throwableObjects.forEach((bottle) => {
+            if (bottle.isColliding(this.endboss)) {
+                this.breakBottle_sound.play();
                 this.endboss.hit();
                 this.bossHealthBar.setPercentage(this.endboss.health);
-            } 
+                this.throwableObjects.splice(bottle, 1);
+            }
         });
 
 
     }
 
-    checkCollideWithGround() {
+    checkBottleCollideWithGround() {
         this.throwableObjects.forEach(bottle => {
-            console.log('y', bottle.y)
-            if (bottle.y >= 263) {
-                bottle.speedY = 0;
-                //clearInterval(bottle.throwBottle);
-                //console.log('x', bottle.x)
-                //console.log('splash', 'bottle')
-                //bottle.animateSplash();
-                // setTimeout(() => {
-                //     this.throwableObjects.splice(index, 1);
-                // }, 500);
+            console.log('y', bottle.y) //wieder löschen!!!
+            if (bottle.y > 374) {
+                console.log('splash', 'bottle') //wieder löschen!!!
+                bottle.animateSplash();
+                this.breakBottle_sound.play();
+                setTimeout(() => {
+                this.throwableObjects.splice(bottle, 1);
+                }, 500);
             }
         });
     }
@@ -210,6 +227,7 @@ class World {
         }
         if (this.endboss.firstContact == true) {
             this.addToMap(this.bossHealthBar);
+            this.bossAppear_sound.play();
         }
     }
 

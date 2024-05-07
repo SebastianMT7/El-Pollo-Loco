@@ -48,6 +48,8 @@ class Endboss extends MovableObj {
         'img/4_enemie_boss_chicken/5_dead/G26.png'
     ];
 
+    bossAppear_sound = new Audio('audio/boss_appears.mp3');
+
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_ALERT);
@@ -68,10 +70,11 @@ class Endboss extends MovableObj {
     hurtBoss() {
         this.hurtBossIntervall = setInterval(() => {
             if (this.isHurt()) {
+                console.log('bosshealt',this.health)
                 this.playAnimation(this.IMAGES_HURT);
                 //this.hurt_sound.play();
             }
-        }, 500 / 10);
+        }, 500);
     }
 
     deadBoss(){
@@ -91,6 +94,7 @@ class Endboss extends MovableObj {
 
         this.checkfirstContact = setInterval(() => {
             if (this.firstContact == true) {
+                //this.bossAppear_sound.play();
                 console.log('contact', 'true')
                 setTimeout(() => {
                     clearInterval(this.alertBoss);

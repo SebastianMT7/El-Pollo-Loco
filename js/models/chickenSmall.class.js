@@ -1,8 +1,9 @@
 class ChickenSmall extends MovableObj {
-    y = 367;
+    y = 370;
     height = 55;
     width = 55;
     health = 100;
+    speedY = 10;
     offset = {
 		top: 5,
 		bottom: 5,
@@ -36,7 +37,7 @@ class ChickenSmall extends MovableObj {
     moveChicken() {
         this.walkingChicken = setInterval(() => {
             this.moveLeft();
-        }, 1000 / 60); //besagt das das Bild 60x pro sek angezeigt wird (60fps)
+        }, 1000 / 60); 
 
         this.walkingChickenAnimation = setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);

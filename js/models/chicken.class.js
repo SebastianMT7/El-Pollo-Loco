@@ -28,7 +28,6 @@ class Chicken extends MovableObj {
         this.height = 80 + this.multiplier;
         this.speed = 0.15 + Math.random() * 0.5; //Math.Random ist immer eine zufälluge Zahl zwischen 0 und 1 deshalb  *0,25
         this.animate();
-        console.log('height', this.y)
     }
 
     animate() {

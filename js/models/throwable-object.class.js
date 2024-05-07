@@ -1,4 +1,5 @@
 class ThrowableObj extends MovableObj {
+    speedY = 25;
 
     IMAGES_THROW = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -13,7 +14,7 @@ class ThrowableObj extends MovableObj {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
-        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ];
 
     constructor(x, y) {
@@ -28,24 +29,22 @@ class ThrowableObj extends MovableObj {
     }
 
 
-    throw() {
-        this.speedY = 25;
+    throw() {        
         this.applyGravity();
         this.throwBottle = setInterval(() => {
             this.x += 10;
-            this.animateThrow();
-        }, 25);
-
-    }
-
-    animateThrow() {
-        setInterval(() => {
             this.playAnimation(this.IMAGES_THROW);
         }, 25);
-    }
+
+    }   
 
     animateSplash() {
-        clearInterval(this.throwBottle);        
-        this.playAnimation(this.IMAGES_SPLASH);         
+        this.speedY = 0;
+        clearInterval(this.throwBottle);
+        setInterval(() => {
+            this.playAnimation(this.IMAGES_SPLASH);
+        }, 25);
+        
+        //console.log('animatesplash', 'splash')
     }
 }
