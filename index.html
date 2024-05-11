@@ -39,17 +39,23 @@
 
     <div class="mainContent">
         <div class="iconBar">
-            <div>
+            <div id="soundOn" onclick="soundOff()">
                 <img src="img/sound_On.png" alt="sound-on">
             </div>
-            <div>
+            <div id="soundOff" class="d-none" onclick="soundOn()">
                 <img src="img/sound_Off.png" alt="sound-off">
             </div>
             <div>
-                <img src="img/fullscreen.png" alt="fullScreen">
+                <img src="img/fullscreen.png" alt="fullScreen" onclick="fullScreen()">
             </div>
         </div>
         <canvas id="canvas" width="720" height="480"></canvas>
+
+    </div>
+    <div class="controllBar">
+        <span>Walking: Arrow Keys</span>
+        <span>Jump: Spacebar</span>
+        <span>Throw Bottle: D Key</span>
     </div>
 </body>
 

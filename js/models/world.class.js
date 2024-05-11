@@ -24,6 +24,10 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        sounds.push(this.collectBottle_sound);
+        sounds.push(this.collectCoin_sound);
+        sounds.push(this.breakBottle_sound);
+        sounds.push(this.bossAppear_sound);
         this.draw();
         this.setWorld();
         this.run();

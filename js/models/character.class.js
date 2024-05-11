@@ -83,6 +83,10 @@ class Character extends MovableObj {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
+
+        sounds.push(this.walk_sound);
+        sounds.push(this.jump_sound);
+        sounds.push(this.hurt_sound);
         this.applyGravity();
         this.animate();
     }
@@ -109,7 +113,7 @@ class Character extends MovableObj {
 
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
-                this.jump_sound.play();
+                this.jump_sound.play();                
             }
 
             this.world.camera_x = -this.x + 100;

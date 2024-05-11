@@ -2,7 +2,10 @@ let canvas;
 let ctx; //abkürzung context
 let world;
 let keyboard = new Keyboard();
-
+let sounds = [];
+background_sound = new Audio('audio/background.mp3');
+background_sound.loop = true;
+background_sound.volume = 0.1;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -10,6 +13,29 @@ function init() {
     ctx = canvas.getContext('2d'); //bewirkt das hinzufügen im canvas (in 2D style)
 
     console.log('my character is', world['character']); //oder world.character
+
+    this.background_sound.play();
+    sounds.push(background_sound);
+}
+
+function fullScreen() {
+    canvas.requestFullscreen();
+}
+
+function soundOff() {
+    document.getElementById('soundOn').classList.add('d-none');
+    document.getElementById('soundOff').classList.remove('d-none');
+    sounds.forEach(sound => {
+        sound.muted = true;
+    });
+}
+
+function soundOn() {
+    document.getElementById('soundOff').classList.add('d-none');
+    document.getElementById('soundOn').classList.remove('d-none');
+    sounds.forEach(sound => {
+        sound.muted = false;
+    })
 }
 
 window.addEventListener('keydown', (event) => {
