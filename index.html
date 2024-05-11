@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 
-  
+
     <script src="js/models/drawable-object.class.js"></script>
     <script src="js/models/moveable-object.class.js"></script>
     <script src="js/models/throwable-object.class.js"></script>
@@ -19,13 +19,13 @@
     <script src="js/models/chickenSmall.class.js"></script>
     <script src="js/models/cloud.class.js"></script>
     <script src="js/models/background-object.class.js"></script>
-    <script src="js/models/keyboard.class.js"></script>    
+    <script src="js/models/keyboard.class.js"></script>
     <script src="js/models/level.class.js"></script>
     <script src="js/models/endboss.class.js"></script>
     <script src="js/models/bottle.class.js"></script>
     <script src="js/models/coin.class.js"></script>
     <script src="js/levels/level1.js"></script>
-    <script src="js/models/world.class.js"></script>  
+    <script src="js/models/world.class.js"></script>
     <script src="js/game.js"></script>
 
     <link rel="shortcut icon" href="img/Logo.png" />
@@ -37,8 +37,8 @@
     <h1>El Pollo Loco</h1>
     <div id></div>
 
-    <div class="mainContent">
-        <div class="iconBar">
+    <div class="mainContent" id="content">
+        <div id="iconBar" class="iconBar d-none">
             <div id="soundOn" onclick="soundOff()">
                 <img src="img/sound_On.png" alt="sound-on">
             </div>
@@ -49,14 +49,28 @@
                 <img src="img/fullscreen.png" alt="fullScreen" onclick="fullScreen()">
             </div>
         </div>
-        <canvas id="canvas" width="720" height="480"></canvas>
-
+        <div id="startScreen" width="720" height="480">
+            <div class="btnBar">
+                <button onclick="startGame()">Start Game</button>
+            </div>
+            <img src="img/9_intro_outro_screens/start/startscreen_1.png" class="screenBorder" width="720" height="480" alt="">
+        </div>
+        <div id="EndScreen" class="d-none" width="720" height="480">
+            <img src="img/9_intro_outro_screens/game_over/game over.png" class="screenBorder" width="720" height="480" alt="">
+        </div>
+        <canvas id="canvas" class="screenBorder d-none" width="720" height="480"></canvas>
     </div>
+
     <div class="controllBar">
         <span>Walking: Arrow Keys</span>
         <span>Jump: Spacebar</span>
         <span>Throw Bottle: D Key</span>
     </div>
+
+    <footer>
+        <a href>Imprint</a>
+        <a href>Privacy</a>
+    </footer>
 </body>
 
 </html>

@@ -8,7 +8,17 @@ background_sound.loop = true;
 background_sound.volume = 0.1;
 
 function init() {
+    document.getElementById('startScreen').classList.remove('d-none');
+    
+}
+
+function startGame(){
+    document.getElementById('startScreen').classList.add('d-none');
+    document.getElementById('iconBar').classList.remove('d-none');
+    initLevel();
+    
     canvas = document.getElementById('canvas');
+    canvas.classList.remove('d-none');
     world = new World(canvas, keyboard);
     ctx = canvas.getContext('2d'); //bewirkt das hinzufügen im canvas (in 2D style)
 

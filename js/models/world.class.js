@@ -18,7 +18,6 @@ class World {
     collectBottle_sound = new Audio('audio/collecting_bottle.mp3');
     collectCoin_sound = new Audio('audio/collecting_coin.mp3');
     breakBottle_sound = new Audio('audio/breaking_bottle.mp3');
-    bossAppear_sound = new Audio('audio/boss_appears.mp3');
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -27,7 +26,6 @@ class World {
         sounds.push(this.collectBottle_sound);
         sounds.push(this.collectCoin_sound);
         sounds.push(this.breakBottle_sound);
-        sounds.push(this.bossAppear_sound);
         this.draw();
         this.setWorld();
         this.run();
@@ -231,7 +229,6 @@ class World {
         }
         if (this.endboss.firstContact == true) {
             this.addToMap(this.bossHealthBar);
-            this.bossAppear_sound.play();
         }
     }
 

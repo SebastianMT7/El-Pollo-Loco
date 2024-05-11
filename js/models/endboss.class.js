@@ -72,14 +72,14 @@ class Endboss extends MovableObj {
     hurtBoss() {
         this.hurtBossIntervall = setInterval(() => {
             if (this.isHurt()) {
-                console.log('bosshealt',this.health)
+                console.log('bosshealth', this.health)
                 this.playAnimation(this.IMAGES_HURT);
                 //this.hurt_sound.play();
             }
         }, 500);
     }
 
-    deadBoss(){
+    deadBoss() {
         this.deadBossIntervall = setInterval(() => {
             if (this.isDead()) {
                 clearInterval(this.moveEndboss);
@@ -96,7 +96,7 @@ class Endboss extends MovableObj {
 
         this.checkfirstContact = setInterval(() => {
             if (this.firstContact == true) {
-                //this.bossAppear_sound.play();
+                this.bossAppear_sound.play();
                 console.log('contact', 'true')
                 setTimeout(() => {
                     clearInterval(this.alertBoss);
@@ -107,8 +107,11 @@ class Endboss extends MovableObj {
     }
 
     moveEndboss() {
+        setTimeout(() => {
+            this.bossAppear_sound.pause();
+        }, 3000);
         clearInterval(this.checkfirstContact);
-        world.bossAppear_sound.pause();
+        
         this.walkBossAnimation = setInterval(() => {
             this.playAnimation(this.IMAGES_WALK);
         }, 1000);
