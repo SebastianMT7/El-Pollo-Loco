@@ -106,6 +106,7 @@ class Endboss extends MovableObj {
 
     moveEndboss() {
         clearInterval(this.checkfirstContact);
+        world.bossAppear_sound.pause();
         this.walkBossAnimation = setInterval(() => {
             this.playAnimation(this.IMAGES_WALK);
         }, 1000);
