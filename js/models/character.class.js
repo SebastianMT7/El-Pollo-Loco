@@ -122,14 +122,13 @@ class Character extends MovableObj {
 
     animateCharakter(){
         setInterval(() => {
-            //%(modulul) ist die bezeichnunge für den mathematischen Rest
-
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
                 this.hurt_sound.play();
 
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                this.world.loseGame();
             }
             else if (this.isAboveGround()) {
                 this.updateMoveTime();
@@ -144,7 +143,6 @@ class Character extends MovableObj {
                 
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
-                // handleIdleAnimations();
             }
         }, 100);
     }
@@ -162,7 +160,7 @@ class Character extends MovableObj {
 
     sleepTime() {
         let passedTime = new Date().getTime() - this.lastMoveTime;
-        return passedTime > 5000;
+        return passedTime > 8000;
     }
 
     jump() {

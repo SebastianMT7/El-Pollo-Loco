@@ -5,9 +5,9 @@ class Endboss extends MovableObj {
     health = 100;
     firstContact = false;
     offset = {
-        top: 75,
+        top: 80,
         bottom: 15,
-        left: 10,
+        left: 20,
         right: 10,
     };
     IMAGES_ALERT = [
@@ -49,6 +49,7 @@ class Endboss extends MovableObj {
     ];
 
     bossAppear_sound = new Audio('audio/boss_appears.mp3');
+    
 
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
@@ -74,7 +75,6 @@ class Endboss extends MovableObj {
             if (this.isHurt()) {
                 console.log('bosshealth', this.health)
                 this.playAnimation(this.IMAGES_HURT);
-                //this.hurt_sound.play();
             }
         }, 500);
     }

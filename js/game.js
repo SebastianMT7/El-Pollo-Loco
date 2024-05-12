@@ -28,6 +28,11 @@ function startGame(){
     sounds.push(background_sound);
 }
 
+function loseGame(){
+    document.getElementById('EndScreen').classList.remove('d-none');
+
+}
+
 function fullScreen() {
     canvas.requestFullscreen();
 }

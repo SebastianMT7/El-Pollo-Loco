@@ -11,14 +11,15 @@ class World {
     bottlesBar = new BottlesBar();
     bossHealthBar = new EndbossHealthBar();
     throwableObjects = [];
-    allIntervalls =[];
+    allIntervalls = [];
     coinsInventory = 0;
     bottlesInventory = 0;
-
 
     collectBottle_sound = new Audio('audio/collecting_bottle.mp3');
     collectCoin_sound = new Audio('audio/collecting_coin.mp3');
     breakBottle_sound = new Audio('audio/breaking_bottle.mp3');
+    cackle_sound = new Audio('audio/chickenCackle.mp3');
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -92,6 +93,7 @@ class World {
                 if (bottle.isColliding(enemy)) {
                     bottle.animateSplash();
                     this.breakBottle_sound.play();
+                    this.cackle_sound.play();
                     //console.log('hit', 'splash')
                     this.deleteEnemy(enemy);
                     //console.log('number', this.throwableObjects)                   
@@ -104,7 +106,9 @@ class World {
     checkBottleCollideWithEndboss() {
         this.throwableObjects.forEach((bottle) => {
             if (bottle.isColliding(this.endboss)) {
-                this.breakBottle_sound.play();
+                bottle.animateSplash();
+                this.breakBottle_sound.play();                
+                this.cackle_sound.play();
                 this.endboss.hit();
                 this.bossHealthBar.setPercentage(this.endboss.health);
                 this.throwableObjects.splice(bottle, 1);
@@ -122,7 +126,7 @@ class World {
                 bottle.animateSplash();
                 this.breakBottle_sound.play();
                 setTimeout(() => {
-                this.throwableObjects.splice(bottle, 1);
+                    this.throwableObjects.splice(bottle, 1);
                 }, 500);
             }
         });
@@ -132,6 +136,7 @@ class World {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
+                    this.cackle_sound.play();
                     this.deleteEnemy(enemy);
                     this.character.jump();
                 }
