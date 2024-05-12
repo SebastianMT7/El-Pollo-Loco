@@ -9,7 +9,7 @@ background_sound.volume = 0.1;
 
 function init() {
     document.getElementById('startScreen').classList.remove('d-none');
-    
+    //clearInterval(world.allIntervalls);
 }
 
 function startGame(){

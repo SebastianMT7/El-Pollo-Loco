@@ -11,6 +11,7 @@ class World {
     bottlesBar = new BottlesBar();
     bossHealthBar = new EndbossHealthBar();
     throwableObjects = [];
+    allIntervalls =[];
     coinsInventory = 0;
     bottlesInventory = 0;
 

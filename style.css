@@ -3,12 +3,6 @@
     margin: 0;
 }
 
-@font-face {
-    font-family: 'zabras';
-    src: url('fonts/zabars.ttf') format('truetype');
-
-}
-
 body {
     height: 100vh;
     padding-top: 50px;
@@ -72,14 +66,14 @@ h1 {
     display: flex;
     justify-content: center;
 
-    button {
-        font-size: 24px;
-        background-color: #FFC100;
-        padding: 8px;
-        border-radius: 10px;
+    span {
+        font-size: 42px;
+        color: #FFCC00;
+        letter-spacing: 2px;
+        filter: drop-shadow(5px 5px 5px #222);        
     }
 
-    button:hover {
+    span:hover {
         cursor: pointer;
         transform: scale(1.1);
     }
