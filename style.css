@@ -18,6 +18,10 @@ body {
     background-repeat: no-repeat;
 }
 
+canvas{
+    display: block;
+}
+
 h1 {
     font-size: 64px;
     letter-spacing: 5px;
@@ -106,5 +110,17 @@ footer {
 
     a:hover {
         color: black;
+    }
+}
+
+@media only screen and (max-width:720px) {
+    canvas {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height:480px) {
+    canvas {
+        height: 100vh;
     }
 }

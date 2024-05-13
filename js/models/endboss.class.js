@@ -2,6 +2,7 @@ class Endboss extends MovableObj {
     y = 5;
     height = 450;
     width = 350;
+    speed = 10;
     health = 100;
     firstContact = false;
     offset = {
@@ -49,7 +50,7 @@ class Endboss extends MovableObj {
     ];
 
     bossAppear_sound = new Audio('audio/boss_appears.mp3');
-    
+
 
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
@@ -58,67 +59,35 @@ class Endboss extends MovableObj {
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-
         sounds.push(this.bossAppear_sound);
         this.x = 3000;
-        this.animate();
+        this.animateEndboss();
     }
 
-    animate() {
-        this.spawnBoss();
-        this.hurtBoss();
-        this.deadBoss();
-    }
-
-    hurtBoss() {
-        this.hurtBossIntervall = setInterval(() => {
-            if (this.isHurt()) {
-                console.log('bosshealth', this.health)
+    animateEndboss() {
+        setInterval(() => {
+            if (this.isHurt() && !this.isDead()) {
                 this.playAnimation(this.IMAGES_HURT);
-            }
-        }, 500);
-    }
-
-    deadBoss() {
-        this.deadBossIntervall = setInterval(() => {
-            if (this.isDead()) {
-                clearInterval(this.moveEndboss);
+            } else if (this.isDead()) {
+                this.speed = 0;
                 this.playAnimation(this.IMAGES_DEAD);
-                //this.dead_sound.play();                
-            }
-        }, 100 / 10);
-    }
-
-    spawnBoss() {
-        this.alertBoss = setInterval(() => {
-            this.playAnimation(this.IMAGES_ALERT);
-        }, 150)
-
-        this.checkfirstContact = setInterval(() => {
-            if (this.firstContact == true) {
-                this.bossAppear_sound.play();
-                console.log('contact', 'true')
                 setTimeout(() => {
-                    clearInterval(this.alertBoss);
-                    this.moveEndboss();
-                }, 1000);
+                    winGame();
+                }, 2000);                
+            } else if (this.firstContact) {
+                this.bossAppears();
+            } else {
+                this.playAnimation(this.IMAGES_ALERT);
             }
-        }, 150);
+        }, 200);
     }
 
-    moveEndboss() {
+    bossAppears() {
+        this.bossAppear_sound.play();
+        this.playAnimation(this.IMAGES_WALK);
+        this.moveLeft();
         setTimeout(() => {
             this.bossAppear_sound.pause();
-        }, 3000);
-        clearInterval(this.checkfirstContact);
-        
-        this.walkBossAnimation = setInterval(() => {
-            this.playAnimation(this.IMAGES_WALK);
-        }, 1000);
-
-        this.walkBoss = setInterval(() => {
-            this.moveLeft();
-        }, 1000 / 60);
+        }, 6000);
     }
-
 }

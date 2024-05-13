@@ -7,16 +7,17 @@ background_sound = new Audio('audio/background.mp3');
 background_sound.loop = true;
 background_sound.volume = 0.1;
 
-function init() {
-    document.getElementById('startScreen').classList.remove('d-none');
-    //clearInterval(world.allIntervalls);
-}
+// function init() {
+//     //document.getElementById('startScreen').classList.remove('d-none');
+//     //clearInterval(world.allIntervalls);
+// }
 
-function startGame(){
+function startGame() {
     document.getElementById('startScreen').classList.add('d-none');
+    document.getElementById('winScreen').classList.add('d-none');
+    document.getElementById('loseScreen').classList.add('d-none');
     document.getElementById('iconBar').classList.remove('d-none');
     initLevel();
-    
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
     world = new World(canvas, keyboard);
@@ -28,9 +29,20 @@ function startGame(){
     sounds.push(background_sound);
 }
 
-function loseGame(){
-    document.getElementById('EndScreen').classList.remove('d-none');
+function loseGame() {
+    canvas.classList.add('d-none');
+    document.getElementById('loseScreen').classList.remove('d-none');
+    document.getElementById('iconBar').classList.add('d-none');
+    //world.clearAllIntervals();
+    this.background_sound.pause();
+}
 
+function winGame() {
+    canvas.classList.add('d-none');
+    document.getElementById('winScreen').classList.remove('d-none');
+    document.getElementById('iconBar').classList.add('d-none');
+    //world.clearAllIntervals();
+    this.background_sound.pause();
 }
 
 function fullScreen() {
