@@ -69,35 +69,20 @@ class World {
         this.checkBottleCollideWithGround();
     }
 
-    // checkBottleCollideWithEnemy() { //funktioniert gerade nur wenn man nicht springt
-    //     this.throwableObjects.forEach((bottle, indexBottle) => {
-    //         this.level.enemies.forEach((enemy, indexEnemy) => {            
-    //                 //debugger;
-    //             if (this.throwableObjects[indexBottle].isColliding(enemy)) {
-    //                 //this.throwableObjects[indexBottle].animateSplash();
-    //                 console.log('hit', 'splash')
-    //                 this.deleteEnemy(enemy);
-    //                 console.log('number', this.throwableObjects)
-
-    //                     this.throwableObjects.splice(indexBottle, 1);
-
-    //             }
-    //         });
-    //     });
-    // }
-
     checkBottleCollideWithEnemy() {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
-                //debugger;
                 if (bottle.isColliding(enemy)) {
                     bottle.animateSplash();
                     this.breakBottle_sound.play();
                     this.cackle_sound.play();
                     //console.log('hit', 'splash')
                     this.deleteEnemy(enemy);
-                    //console.log('number', this.throwableObjects)                   
-                    this.throwableObjects.splice(bottle, 1);
+                    //console.log('number', this.throwableObjects)  
+                    debugger;                 
+                    setTimeout(() => {
+                        this.throwableObjects.splice(bottle, 1);
+                    }, 150);
                 }
             });
         });
@@ -106,21 +91,28 @@ class World {
     checkBottleCollideWithEndboss() {
         this.throwableObjects.forEach((bottle) => {
             if (bottle.isColliding(this.endboss)) {
-                bottle.animateSplash();
-                this.breakBottle_sound.play();                
+                bottle.animateSplash(bottle);
+                this.breakBottle_sound.play();
                 this.cackle_sound.play();
                 this.endboss.hit();
                 this.bossHealthBar.setPercentage(this.endboss.health);
-                this.throwableObjects.splice(bottle, 1);
+                debugger;
+                setTimeout(() => {
+                    this.throwableObjects.splice(bottle, 1);
+                }, 200);
             }
         });
-
-
     }
+
+    // deleteOb(bottle){
+    //     setTimeout(() => {
+    //         this.throwableObjects.splice(bottle, 1);
+    //     }, 200);
+    // }
 
     checkBottleCollideWithGround() {
         this.throwableObjects.forEach(bottle => {
-            console.log('y', bottle.y) //wieder löschen!!!
+            //console.log('y', bottle.y) //wieder löschen!!!
             if (bottle.y > 374) {
                 console.log('splash', 'bottle') //wieder löschen!!!
                 bottle.animateSplash();
