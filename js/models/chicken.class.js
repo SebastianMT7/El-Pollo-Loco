@@ -46,7 +46,7 @@ class Chicken extends MovableObj {
     }
 
     checkDead() {
-        setInterval(() => {
+        this.chickenDeath = setInterval(() => {
             if (this.isDead()) {
                 this.loadImage(this.IMAGES_DEAD);
                 clearInterval(this.walkingChickenAnimation)
@@ -56,5 +56,7 @@ class Chicken extends MovableObj {
                 }, 500);
             };
         }, 50);
+        //allIntervalls.push(this.chickenDeath);
+        console.log('inter', allIntervalls)
     }
 }

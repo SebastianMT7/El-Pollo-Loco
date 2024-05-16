@@ -3,6 +3,7 @@ let ctx; //abkürzung context
 let world;
 let keyboard = new Keyboard();
 let sounds = [];
+let allIntervalls = [];
 background_sound = new Audio('audio/background.mp3');
 background_sound.loop = true;
 background_sound.volume = 0.1;

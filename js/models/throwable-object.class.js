@@ -37,7 +37,7 @@ class ThrowableObj extends MovableObj {
         }, 25);
     }   
 
-    animateSplash(bottle) {
+    animateSplash() {
         this.speedY = 0;
         clearInterval(this.throwBottle);
         console.log('hit', 'splash')
