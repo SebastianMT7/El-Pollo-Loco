@@ -21,6 +21,8 @@ class Bottle extends MovableObj {
 		right: 10,
 	};
 
+    isExploded = false;
+
     constructor(x) {
         super().loadImage('img/6_salsa_bottle/1_salsa_bottle_on_ground.png');
         this.loadImages(this.IMAGES_GROUND);

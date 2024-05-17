@@ -28,6 +28,7 @@ class World {
         sounds.push(this.collectBottle_sound);
         sounds.push(this.collectCoin_sound);
         sounds.push(this.breakBottle_sound);
+        sounds.push(this.cackle_sound);
         this.draw();
         this.setWorld();
         this.run();
@@ -70,7 +71,8 @@ class World {
     checkBottleCollideWithEnemy() {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
-                if (bottle.isColliding(enemy)) {
+                if (bottle.isColliding(enemy) && !bottle.isExploded) {
+                    bottle.isExploded = true;
                     bottle.animateSplash();
                     this.breakBottle_sound.play();
                     this.cackle_sound.play();
