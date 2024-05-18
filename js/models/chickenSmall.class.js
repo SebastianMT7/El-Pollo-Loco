@@ -5,11 +5,11 @@ class ChickenSmall extends MovableObj {
     health = 100;
     speedY = 10;
     offset = {
-		top: 5,
-		bottom: 5,
-		left: 5,
-		right: 5,
-	};
+        top: 5,
+        bottom: 5,
+        left: 5,
+        right: 5,
+    };
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
@@ -20,12 +20,12 @@ class ChickenSmall extends MovableObj {
     ];
 
 
-    constructor(){
+    constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 700 + Math.random() * 2000;        
-        this.speed = 0.15 + Math.random() * 0.5; 
+        this.x = 700 + Math.random() * 2000;
+        this.speed = 0.15 + Math.random() * 0.5;
         this.animate();
     }
 
@@ -37,23 +37,26 @@ class ChickenSmall extends MovableObj {
     moveChicken() {
         this.walkingChicken = setInterval(() => {
             this.moveLeft();
-        }, 1000 / 60); 
+        }, 1000 / 60);
+        allIntervalls.push(this.walkingChicken);
 
         this.walkingChickenAnimation = setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 150);
+        allIntervalls.push(this.walkingChickenAnimation);
     }
 
     checkDead() {
-        setInterval(() => {
+        this.chickenDeath = setInterval(() => {
             if (this.isDead()) {
                 this.loadImage(this.IMAGES_DEAD);
                 clearInterval(this.walkingChicken)
                 clearInterval(this.walkingChickenAnimation)
                 setTimeout(() => {
                     this.y += this.speedY;
-                }, 500);                
+                }, 500);
             };
         }, 50);
-    } 
+        allIntervalls.push(this.chickenDeath);
+    }
 }

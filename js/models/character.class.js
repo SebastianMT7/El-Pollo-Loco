@@ -97,7 +97,7 @@ class Character extends MovableObj {
     }
 
     moveCharacter() {
-        setInterval(() => {
+        this.moveChar = setInterval(() => {
             this.walk_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
@@ -118,10 +118,11 @@ class Character extends MovableObj {
 
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
+        allIntervalls.push(this.moveChar);
     }
 
     animateCharakter() {
-        setInterval(() => {
+        this.animateChar = setInterval(() => {
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
                 this.hurt_sound.play();
@@ -145,7 +146,7 @@ class Character extends MovableObj {
                 this.playAnimation(this.IMAGES_IDLE);
             }
         }, 100);
-        
+        allIntervalls.push(this.animateChar);
     }
 
     // handleIdleAnimations() {

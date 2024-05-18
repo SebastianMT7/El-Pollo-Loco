@@ -39,10 +39,12 @@ class Chicken extends MovableObj {
         this.walkingChicken = setInterval(() => {
             this.moveLeft();
         }, 1000 / 60); //besagt das das Bild 60x pro sek angezeigt wird (60fps)
+        allIntervalls.push(this.walkingChicken);
 
         this.walkingChickenAnimation = setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 150);
+        allIntervalls.push(this.walkingChickenAnimation);
     }
 
     checkDead() {
@@ -56,7 +58,7 @@ class Chicken extends MovableObj {
                 }, 500);
             };
         }, 50);
-        //allIntervalls.push(this.chickenDeath);
-        console.log('inter', allIntervalls)
+        allIntervalls.push(this.chickenDeath);
+        //console.log('intervalls', allIntervalls)
     }
 }

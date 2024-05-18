@@ -13,36 +13,53 @@ background_sound.volume = 0.1;
 //     //clearInterval(world.allIntervalls);
 // }
 
-function startGame() {
+function startGame() {    
     document.getElementById('startScreen').classList.add('d-none');
     document.getElementById('winScreen').classList.add('d-none');
     document.getElementById('loseScreen').classList.add('d-none');
     document.getElementById('iconBar').classList.remove('d-none');
-    initLevel();
+    
+    document.getElementById('mobileHud').classList.remove('d-none');
+    
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
-    world = new World(canvas, keyboard);
-    ctx = canvas.getContext('2d'); //bewirkt das hinzufügen im canvas (in 2D style)
-
-    console.log('my character is', world['character']); //oder world.character
-
+    initLevel();
+    initGame();
+    
+    //console.log('my character is', world['character']); //oder world.character
+    //resetGameWorldContent(); -> benötigt?
     this.background_sound.play();
     sounds.push(background_sound);
+    
+}
+
+function initGame(){
+    canvas = document.getElementById('canvas');
+    world = new World(canvas, keyboard);
+}
+
+function resetGameWorldContent() {
+    world.throwableObjects = []; //benötigt??
+    world.coinsInventory = 0;
+    world.bottlesInventory = 0;
 }
 
 function loseGame() {
-    canvas.classList.add('d-none');
+    document.getElementById('canvas').classList.add('d-none');
     document.getElementById('loseScreen').classList.remove('d-none');
     document.getElementById('iconBar').classList.add('d-none');
-    //world.clearAllIntervals();
+    document.getElementById('mobileHud').classList.add('d-none');
+    
+    clearInterval(this.allIntervalls);
     this.background_sound.pause();
 }
 
 function winGame() {
-    canvas.classList.add('d-none');
+    document.getElementById('canvas').classList.add('d-none');
     document.getElementById('winScreen').classList.remove('d-none');
     document.getElementById('iconBar').classList.add('d-none');
-    //world.clearAllIntervals();
+    document.getElementById('mobileHud').classList.add('d-none')
+    clearInterval(this.allIntervalls);
     this.background_sound.pause();
 }
 
@@ -66,45 +83,5 @@ function soundOn() {
     })
 }
 
-window.addEventListener('keydown', (event) => {
-    if (event.keyCode == 39) {
-        keyboard.RIGHT = true;
-    }
-    if (event.keyCode == 37) {
-        keyboard.LEFT = true;
-    }
-    if (event.keyCode == 38) {
-        keyboard.UP = true;
-    }
-    if (event.keyCode == 40) {
-        keyboard.DOWN = true;
-    }
-    if (event.keyCode == 32) {
-        keyboard.SPACE = true;
-    }
-    if (event.keyCode == 68) {
-        keyboard.D = true;
-    }
-});
 
-window.addEventListener('keyup', (event) => {
-    if (event.keyCode == 39) {
-        keyboard.RIGHT = false;
-    }
-    if (event.keyCode == 37) {
-        keyboard.LEFT = false;
-    }
-    if (event.keyCode == 38) {
-        keyboard.UP = false;
-    }
-    if (event.keyCode == 40) {
-        keyboard.DOWN = false;
-    }
-    if (event.keyCode == 32) {
-        keyboard.SPACE = false;
-    }
-    if (event.keyCode == 68) {
-        keyboard.D = false;
-    }
-});
 

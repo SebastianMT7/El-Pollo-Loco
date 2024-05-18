@@ -60,6 +60,8 @@
             <div class="btnBar">
                 <span onclick="startGame()">New Game</span>
             </div>
+
+            <!-- window.location.reload() -->
             <img src="img/9_intro_outro_screens/win/won_1.png" class="screenBorder" width="720" height="480" alt="">
         </div>
         <div id="loseScreen" class="d-none" width="720" height="480">
@@ -69,6 +71,20 @@
             <img src="img/9_intro_outro_screens/game_over/game over.png" class="screenBorder" width="720" height="480" alt="">
         </div>
         <canvas id="canvas" class="screenBorder d-none" width="720" height="480"></canvas>
+    
+        <div id="mobileHud" class="mobileHud d-none">
+            <div class="hudPosition">
+            <div>
+                <img id="btnLeft" src="/img/mobileLeft.png" alt="mobileLeft">
+                <img id="btnRight" src="/img/mobileRight.png" alt="mobileRight">
+            </div>
+            <div>
+                <img id="btnJump" src="/img/mobileJump.png" alt="mobileJump">
+                <img id="btnThrow" src="/img/mobileThrow.png" alt="mobileThrow">
+            </div>
+        </div>
+        </div>
+    
     </div>
 
     <div class="controllBar">

@@ -1,4 +1,4 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
 }
@@ -18,7 +18,7 @@ body {
     background-repeat: no-repeat;
 }
 
-canvas{
+canvas {
     display: block;
 }
 
@@ -63,7 +63,7 @@ h1 {
     }
 }
 
-.btnBar{
+.btnBar {
     width: 100%;
     position: absolute;
     top: 50px;
@@ -74,7 +74,7 @@ h1 {
         font-size: 42px;
         color: #FFCC00;
         letter-spacing: 2px;
-        filter: drop-shadow(5px 5px 5px #222);        
+        filter: drop-shadow(5px 5px 5px #222);
     }
 
     span:hover {
@@ -111,6 +111,33 @@ footer {
     a:hover {
         color: black;
     }
+}
+
+.mobileHud {    
+    width: 100%;
+    padding: 0 10px 10px 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    img {
+        height: 50px;
+    }
+
+    img:hover{
+        cursor: pointer;
+    }
+}
+
+.hudPosition {
+    display: flex;
+    justify-content: space-between;
+
+    div{
+        display: flex;
+        gap: 10px;
+    }
+    
 }
 
 @media only screen and (max-width:720px) {

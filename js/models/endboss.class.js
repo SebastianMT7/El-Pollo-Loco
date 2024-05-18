@@ -65,7 +65,7 @@ class Endboss extends MovableObj {
     }
 
     animateEndboss() {
-        setInterval(() => {
+       this.animateBoss =  setInterval(() => {
             if (this.isHurt() && !this.isDead()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isDead()) {
@@ -80,6 +80,7 @@ class Endboss extends MovableObj {
                 this.playAnimation(this.IMAGES_ALERT);
             }
         }, 200);
+        allIntervalls.push(this.animateBoss);
     }
 
     bossAppears() {

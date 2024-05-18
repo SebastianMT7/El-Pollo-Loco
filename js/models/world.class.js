@@ -22,7 +22,7 @@ class World {
 
 
     constructor(canvas, keyboard) {
-        this.ctx = canvas.getContext('2d');
+        this.ctx = canvas.getContext('2d');//bewirkt das hinzufügen im canvas (in 2D style)
         this.canvas = canvas;
         this.keyboard = keyboard;
         sounds.push(this.collectBottle_sound);
@@ -76,12 +76,10 @@ class World {
                     bottle.animateSplash();
                     this.breakBottle_sound.play();
                     this.cackle_sound.play();
-                    //console.log('hit', 'splash')
                     setTimeout(() => {
                         this.throwableObjects.splice(bottle, 1);
                     }, 80);
-                    this.deleteEnemy(enemy);
-                    //console.log('number', this.throwableObjects)    
+                    this.deleteEnemy(enemy);   
                 }
             });
         });
@@ -89,7 +87,8 @@ class World {
 
     checkBottleCollideWithEndboss() {
         this.throwableObjects.forEach((bottle) => {
-            if (bottle.isColliding(this.endboss)) {
+            if (bottle.isColliding(this.endboss)&& !bottle.isExploded) {
+                bottle.isExploded = true; 
                 bottle.animateSplash(bottle);
                 this.breakBottle_sound.play();
                 this.cackle_sound.play();
@@ -97,7 +96,7 @@ class World {
                 this.bossHealthBar.setPercentage(this.endboss.health);
                 setTimeout(() => {
                     this.throwableObjects.splice(bottle, 1);
-                }, 200);
+                }, 80);
             }
         });
     }
