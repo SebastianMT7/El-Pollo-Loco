@@ -168,7 +168,7 @@ class World {
     checkCoinsReward() {
         if (this.coinsInventory == 100 && this.character.health < 100) {
             this.coinsInventory = 0;
-            this.character.regenerateHealth();
+            this.character.recoverHealth();
             this.coinsBar.setPercentage(this.coinsInventory);
             this.healthBar.setPercentage(this.character.health);            
             this.regenHealth_sound.play();

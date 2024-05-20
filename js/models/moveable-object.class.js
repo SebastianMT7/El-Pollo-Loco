@@ -55,7 +55,7 @@ class MovableObj extends DrawableObj {
         }
     }
 
-    regenerateHealth() {
+    recoverHealth() {
         let healthRegen = 20;
         let newHealth = this.health + healthRegen;
         if (newHealth >= 100) {
