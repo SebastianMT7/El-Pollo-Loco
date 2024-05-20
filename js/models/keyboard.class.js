@@ -23,6 +23,7 @@ class Keyboard {
         window.addEventListener("touchstart", (e) => {
             if (e.target.id == "btnRight") {
                 keyboard.RIGHT = true;
+                console.log('touchRight','touch')
             }
         
             if (e.target.id == "btnLeft") {
@@ -37,26 +38,10 @@ class Keyboard {
                 keyboard.D = true;
             }
         });
-        // document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
-        //     e.preventDefault();
-        //     this.LEFT = true;
-        // });
-        // document.getElementById('btnRight').addEventListener('touchstart', (e) => {
-        //     e.preventDefault();
-        //     this.RIGHT = true;
-        // });
-        // document.getElementById('btnJump').addEventListener('touchstart', (e) => {
-        //     e.preventDefault();
-        //     this.SPACE = true;
-        // });
-        // document.getElementById('btnThrow').addEventListener('touchstart', (e) => {
-        //     e.preventDefault();
-        //     this.D = true;
-        // });
     }
 
     bindTouchEnd() {
-        window.addEventListener("touchstart", (e) => {
+        window.addEventListener("touchend", (e) => {
             if (e.target.id == "btnRight") {
                 keyboard.RIGHT = false;
             }
@@ -73,22 +58,6 @@ class Keyboard {
                 keyboard.D = false;
             }
         });
-        // document.getElementById('btnLeft').addEventListener('touchend', (e) => {
-        //     e.preventDefault();
-        //     this.LEFT = false;
-        // });
-        // document.getElementById('btnRight').addEventListener('touchend', (e) => {
-        //     e.preventDefault();
-        //     this.RIGHT = false;
-        // });
-        // document.getElementById('btnJump').addEventListener('touchend', (e) => {
-        //     e.preventDefault();
-        //     this.SPACE = false;
-        // });
-        // document.getElementById('btnThrow').addEventListener('touchend', (e) => {
-        //     e.preventDefault();
-        //     this.D = false;
-        // });
     }
 
     bindKeyStart() {

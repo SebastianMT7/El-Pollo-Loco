@@ -17,12 +17,9 @@ function startGame() {
     document.getElementById('startScreen').classList.add('d-none');
     document.getElementById('winScreen').classList.add('d-none');
     document.getElementById('loseScreen').classList.add('d-none');
-    document.getElementById('iconBar').classList.remove('d-none');
-    
+    document.getElementById('iconBar').classList.remove('d-none');    
     document.getElementById('mobileHud').classList.remove('d-none');
-    
-    canvas = document.getElementById('canvas');
-    canvas.classList.remove('d-none');
+    console.log('Game','start')
     initLevel();
     initGame();
     
@@ -35,30 +32,29 @@ function startGame() {
 
 function initGame(){
     canvas = document.getElementById('canvas');
+    canvas.classList.remove('d-none');
     world = new World(canvas, keyboard);
 }
 
-function resetGameWorldContent() {
-    world.throwableObjects = []; //benötigt??
-    world.coinsInventory = 0;
-    world.bottlesInventory = 0;
-}
+// function resetGameWorldContent() {
+//     world.throwableObjects = []; //benötigt??
+// }
 
 function loseGame() {
     document.getElementById('canvas').classList.add('d-none');
-    document.getElementById('loseScreen').classList.remove('d-none');
     document.getElementById('iconBar').classList.add('d-none');
     document.getElementById('mobileHud').classList.add('d-none');
+    document.getElementById('loseScreen').classList.remove('d-none');
     
     clearInterval(this.allIntervalls);
     this.background_sound.pause();
 }
 
 function winGame() {
-    document.getElementById('canvas').classList.add('d-none');
-    document.getElementById('winScreen').classList.remove('d-none');
+    document.getElementById('canvas').classList.add('d-none');   
     document.getElementById('iconBar').classList.add('d-none');
-    document.getElementById('mobileHud').classList.add('d-none')
+    document.getElementById('mobileHud').classList.add('d-none');
+    document.getElementById('winScreen').classList.remove('d-none');
     clearInterval(this.allIntervalls);
     this.background_sound.pause();
 }
