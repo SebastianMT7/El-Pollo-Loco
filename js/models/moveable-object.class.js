@@ -55,6 +55,14 @@ class MovableObj extends DrawableObj {
         }
     }
 
+    regenerateHealth() {
+        let healthRegen = 20;
+        let newHealth = this.health + healthRegen;
+        if (newHealth >= 100) {
+            this.health = 100
+        } else this.health += 20;
+    }
+
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; //Differenz in millisekunden
         timePassed = timePassed / 1000; //Differenz in sekunden
@@ -86,6 +94,5 @@ class MovableObj extends DrawableObj {
     jump() {
         this.speedY = 30;
     }
-
 
 }

@@ -19,6 +19,7 @@ class World {
     collectCoin_sound = new Audio('audio/collecting_coin.mp3');
     breakBottle_sound = new Audio('audio/breaking_bottle.mp3');
     cackle_sound = new Audio('audio/chickenCackle.mp3');
+    regenHealth_sound = new Audio('audio/healthregen.mp3');
 
 
     constructor(canvas, keyboard) {
@@ -39,9 +40,12 @@ class World {
     }
 
     run() {
-        setInterval(() => {this.checkCollisions();}, 60);
-        setInterval(() => {this.checkCollisionThrowableObj();}, 1000 / 20);
-        setInterval(() => {this.checkThrowBottle();}, 1000 / 20);
+        console.log('bottles', this.bottlesInventory)
+        console.log('coins', this.coinsInventory)
+        setInterval(() => { this.checkCollisions(); }, 60);
+        setInterval(() => { this.checkCollisionThrowableObj(); }, 1000 / 20);
+        setInterval(() => { this.checkThrowBottle(); }, 1000 / 20);
+        setInterval(() => { this.checkCoinsReward(); }, 1000 / 20);
     }
 
     checkThrowBottle() {
@@ -79,7 +83,7 @@ class World {
                     setTimeout(() => {
                         this.throwableObjects.splice(bottle, 1);
                     }, 80);
-                    this.deleteEnemy(enemy);   
+                    this.deleteEnemy(enemy);
                 }
             });
         });
@@ -87,8 +91,8 @@ class World {
 
     checkBottleCollideWithEndboss() {
         this.throwableObjects.forEach((bottle) => {
-            if (bottle.isColliding(this.endboss)&& !bottle.isExploded) {
-                bottle.isExploded = true; 
+            if (bottle.isColliding(this.endboss) && !bottle.isExploded) {
+                bottle.isExploded = true;
                 bottle.animateSplash(bottle);
                 this.breakBottle_sound.play();
                 this.cackle_sound.play();
@@ -150,29 +154,37 @@ class World {
     collisionCoins() {
         this.level.coins.forEach(coin => {
             if (this.character.isColliding(coin)) {
-                this.coinsInventory += 20;
-                if (this.coinsInventory >= 100) {
-                    this.coinsInventory = 100;
+                if (this.coinsInventory < 100) {
+                    this.coinsInventory += 20;
+                    this.collectCoin_sound.play();
+                    this.coinsBar.setPercentage(this.coinsInventory);
+                    let coinIndex = this.level.coins.indexOf(coin);
+                    this.level.coins.splice(coinIndex, 1);
                 }
-                this.collectCoin_sound.play();
-                this.coinsBar.setPercentage(this.coinsInventory);
-                let coinIndex = this.level.coins.indexOf(coin);
-                this.level.coins.splice(coinIndex, 1);
             }
         });
+    }
+
+    checkCoinsReward() {
+        if (this.coinsInventory == 100 && this.character.health < 100) {
+            this.coinsInventory = 0;
+            this.character.regenerateHealth();
+            this.coinsBar.setPercentage(this.coinsInventory);
+            this.healthBar.setPercentage(this.character.health);            
+            this.regenHealth_sound.play();
+        }
     }
 
     collisionBottles() {
         this.level.bottles.forEach(bottle => {
             if (this.character.isColliding(bottle)) {
-                this.bottlesInventory += 20;
-                if (this.bottlesInventory >= 100) {
-                    this.bottlesInventory = 100;
+                if (this.bottlesInventory < 100) {
+                    this.bottlesInventory += 20;
+                    this.collectBottle_sound.play();
+                    this.bottlesBar.setPercentage(this.bottlesInventory);
+                    let bottleIndex = this.level.bottles.indexOf(bottle);
+                    this.level.bottles.splice(bottleIndex, 1);
                 }
-                this.collectBottle_sound.play();
-                this.bottlesBar.setPercentage(this.bottlesInventory);
-                let bottleIndex = this.level.bottles.indexOf(bottle);
-                this.level.bottles.splice(bottleIndex, 1);
             }
         });
     }
@@ -198,12 +210,12 @@ class World {
 
     addLevelObjects() {
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
         this.addToMap(this.character);
         this.addToMap(this.endboss);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
-        this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.bottles);
     }
 
     addLevelBars() {

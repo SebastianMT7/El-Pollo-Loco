@@ -19,7 +19,7 @@ function startGame() {
     document.getElementById('loseScreen').classList.add('d-none');
     document.getElementById('iconBar').classList.remove('d-none');    
     document.getElementById('mobileHud').classList.remove('d-none');
-    console.log('Game','start')
+    console.log('Game:','start')
     initLevel();
     initGame();
     
@@ -45,8 +45,8 @@ function loseGame() {
     document.getElementById('iconBar').classList.add('d-none');
     document.getElementById('mobileHud').classList.add('d-none');
     document.getElementById('loseScreen').classList.remove('d-none');
-    
-    clearInterval(this.allIntervalls);
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    //clearInterval(this.allIntervalls);
     this.background_sound.pause();
 }
 
@@ -55,7 +55,8 @@ function winGame() {
     document.getElementById('iconBar').classList.add('d-none');
     document.getElementById('mobileHud').classList.add('d-none');
     document.getElementById('winScreen').classList.remove('d-none');
-    clearInterval(this.allIntervalls);
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    //clearInterval(this.allIntervalls);
     this.background_sound.pause();
 }
 
