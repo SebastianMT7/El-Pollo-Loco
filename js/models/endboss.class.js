@@ -89,6 +89,6 @@ class Endboss extends MovableObj {
         this.moveLeft();
         setTimeout(() => {
             this.bossAppear_sound.pause();
-        }, 6000);
+        }, 5000);
     }
 }
