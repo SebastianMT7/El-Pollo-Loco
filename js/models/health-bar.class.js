@@ -43,5 +43,4 @@ class HealthBar extends DrawableObj {
             return 0;
         }
     }
-
 }

@@ -30,6 +30,7 @@ class World {
         sounds.push(this.collectCoin_sound);
         sounds.push(this.breakBottle_sound);
         sounds.push(this.cackle_sound);
+        sounds.push(this.regenHealth_sound);
         this.draw();
         this.setWorld();
         this.run();
@@ -40,8 +41,6 @@ class World {
     }
 
     run() {
-        console.log('bottles', this.bottlesInventory)
-        console.log('coins', this.coinsInventory)
         setInterval(() => { this.checkCollisions(); }, 60);
         setInterval(() => { this.checkCollisionThrowableObj(); }, 1000 / 20);
         setInterval(() => { this.checkThrowBottle(); }, 1000 / 20);
@@ -107,9 +106,7 @@ class World {
 
     checkBottleCollideWithGround() {
         this.throwableObjects.forEach(bottle => {
-            //console.log('y', bottle.y) //wieder löschen!!!
             if (bottle.y > 374) {
-                //console.log('splash', 'bottle') //wieder löschen!!!
                 bottle.animateSplash();
                 this.breakBottle_sound.play();
                 setTimeout(() => {
@@ -136,7 +133,7 @@ class World {
     }
 
     deleteEnemy(enemy) {
-        console.log('chicken death', enemy)
+        //console.log('chicken death', enemy)
         enemy.health = 0;
         setTimeout(() => {
             let index = this.level.enemies.indexOf(enemy);
@@ -197,7 +194,6 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addLevelObjects();
         this.ctx.translate(-this.camera_x, 0);
-        //-------Space for fixed object--------
         this.addLevelBars();
         this.ctx.translate(this.camera_x, 0);
         this.ctx.translate(-this.camera_x, 0);

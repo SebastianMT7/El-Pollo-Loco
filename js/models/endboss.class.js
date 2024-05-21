@@ -11,6 +11,7 @@ class Endboss extends MovableObj {
         left: 20,
         right: 10,
     };
+    bossAppear_sound = new Audio('audio/boss_appears.mp3');
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
         'img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -47,10 +48,7 @@ class Endboss extends MovableObj {
         'img/4_enemie_boss_chicken/5_dead/G24.png',
         'img/4_enemie_boss_chicken/5_dead/G25.png',
         'img/4_enemie_boss_chicken/5_dead/G26.png'
-    ];
-
-    bossAppear_sound = new Audio('audio/boss_appears.mp3');
-
+    ];  
 
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
@@ -80,7 +78,7 @@ class Endboss extends MovableObj {
                 this.playAnimation(this.IMAGES_ALERT);
             }
         }, 200);
-        allIntervalls.push(this.animateBoss);
+        //allIntervalls.push(this.animateBoss);
     }
 
     bossAppears() {

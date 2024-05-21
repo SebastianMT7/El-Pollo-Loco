@@ -38,12 +38,12 @@ class ChickenSmall extends MovableObj {
         this.walkingChicken = setInterval(() => {
             this.moveLeft();
         }, 1000 / 60);
-        allIntervalls.push(this.walkingChicken);
+        //allIntervalls.push(this.walkingChicken);
 
         this.walkingChickenAnimation = setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 150);
-        allIntervalls.push(this.walkingChickenAnimation);
+        //allIntervalls.push(this.walkingChickenAnimation);
     }
 
     checkDead() {
@@ -57,6 +57,6 @@ class ChickenSmall extends MovableObj {
                 }, 500);
             };
         }, 50);
-        allIntervalls.push(this.chickenDeath);
+        //allIntervalls.push(this.chickenDeath);
     }
 }

@@ -8,29 +8,23 @@ background_sound = new Audio('audio/background.mp3');
 background_sound.loop = true;
 background_sound.volume = 0.1;
 
-// function init() {
-//     //document.getElementById('startScreen').classList.remove('d-none');
-//     //clearInterval(world.allIntervalls);
-// }
 
-function startGame() {    
+function startGame() {
     document.getElementById('startScreen').classList.add('d-none');
     document.getElementById('winScreen').classList.add('d-none');
     document.getElementById('loseScreen').classList.add('d-none');
-    document.getElementById('iconBar').classList.remove('d-none');    
+    document.getElementById('iconBar').classList.remove('d-none');
     document.getElementById('mobileHud').classList.remove('d-none');
-    console.log('Game:','start')
+    console.log('Game:', 'start')
     initLevel();
     initGame();
-    
     //console.log('my character is', world['character']); //oder world.character
     //resetGameWorldContent(); -> benötigt?
     this.background_sound.play();
     sounds.push(background_sound);
-    
 }
 
-function initGame(){
+function initGame() {
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
     world = new World(canvas, keyboard);
@@ -48,10 +42,11 @@ function loseGame() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
     //clearInterval(this.allIntervalls);
     this.background_sound.pause();
+    sounds = [];
 }
 
 function winGame() {
-    document.getElementById('canvas').classList.add('d-none');   
+    document.getElementById('canvas').classList.add('d-none');
     document.getElementById('iconBar').classList.add('d-none');
     document.getElementById('mobileHud').classList.add('d-none');
     document.getElementById('winScreen').classList.remove('d-none');

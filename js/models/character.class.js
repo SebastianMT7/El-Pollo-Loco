@@ -9,6 +9,11 @@ class Character extends MovableObj {
         left: 20,
         right: 20,
     };
+    world;
+    walk_sound = new Audio('audio/walking.mp3');
+    jump_sound = new Audio('audio/jump.mp3');
+    hurt_sound = new Audio('audio/hurt.mp3');
+
     IMAGES_IDLE = [
         'img/2_character_pepe/1_idle/idle/I-1.png',
         'img/2_character_pepe/1_idle/idle/I-2.png',
@@ -69,11 +74,6 @@ class Character extends MovableObj {
         'img/2_character_pepe/5_dead/D-56.png',
         'img/2_character_pepe/5_dead/D-57.png'
     ];
-    world;
-    walk_sound = new Audio('audio/walking.mp3');
-    jump_sound = new Audio('audio/jump.mp3');
-    hurt_sound = new Audio('audio/hurt.mp3');
-
 
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
@@ -104,21 +104,18 @@ class Character extends MovableObj {
                 this.otherDirection = false;
                 this.walk_sound.play();
             }
-
             if (this.world.keyboard.LEFT && this.x > 100) {
                 this.moveLeft();
                 this.otherDirection = true;
                 this.walk_sound.play();
             }
-
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
                 this.jump_sound.play();
             }
-
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
-        allIntervalls.push(this.moveChar);
+        //allIntervalls.push(this.moveChar);
     }
 
     animateCharakter() {
@@ -146,7 +143,7 @@ class Character extends MovableObj {
                 this.playAnimation(this.IMAGES_IDLE);
             }
         }, 100);
-        allIntervalls.push(this.animateChar);
+        //allIntervalls.push(this.animateChar);
     }
 
     // handleIdleAnimations() {

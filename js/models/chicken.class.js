@@ -58,7 +58,7 @@ class Chicken extends MovableObj {
                 }, 500);
             };
         }, 50);
-        allIntervalls.push(this.chickenDeath);
+        //allIntervalls.push(this.chickenDeath);
         //console.log('intervalls', allIntervalls)
     }
 }

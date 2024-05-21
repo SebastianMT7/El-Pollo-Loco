@@ -44,15 +44,15 @@ class MovableObj extends DrawableObj {
     }
 
     hit() {
-        if (this instanceof Endboss) {
-            this.health -= 20;
-        }
-        this.health -= 5;
+        this.health -= 5;       
         if (this.health < 0) {
             this.health = 0;
         } else {
             this.lastHit = new Date().getTime();
         }
+        if (this instanceof Endboss) {
+            this.health -= 20;
+        } 
     }
 
     recoverHealth() {

@@ -28,7 +28,6 @@ class ThrowableObj extends MovableObj {
         this.throw();
     }
 
-
     throw() {        
         this.applyGravity();
         this.throwBottle = setInterval(() => {
@@ -40,8 +39,6 @@ class ThrowableObj extends MovableObj {
     animateSplash() {
         this.speedY = 0;
         clearInterval(this.throwBottle);
-        console.log('hit', 'splash')
-        this.playAnimation(this.IMAGES_SPLASH);              
-        console.log('animatesplash', 'splash')
+        this.playAnimation(this.IMAGES_SPLASH); 
     }
 }

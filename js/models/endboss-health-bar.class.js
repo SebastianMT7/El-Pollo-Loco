@@ -22,10 +22,11 @@ class EndbossHealthBar extends DrawableObj {
     }
 
     setPercentage(percentage) {
-        this.percentage = percentage;//=>0...5
+        this.percentage = percentage;
         let path = this.IMAGES_LIVE[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
+
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;
@@ -41,5 +42,4 @@ class EndbossHealthBar extends DrawableObj {
             return 0;
         }
     }
-
 }

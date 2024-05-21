@@ -27,6 +27,7 @@ class BottlesBar extends DrawableObj {
         this.img = this.imageCache[path];
         console.log('percentage',percentage)
     }
+    
     resolveImageIndex() {
         if (this.percentage >= 100) {
             return 5;
@@ -42,5 +43,4 @@ class BottlesBar extends DrawableObj {
             return 0;
         }
     }
-
 }

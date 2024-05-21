@@ -24,16 +24,13 @@ class Keyboard {
             if (e.target.id == "btnRight") {
                 keyboard.RIGHT = true;
                 console.log('touchRight','touch')
-            }
-        
+            }        
             if (e.target.id == "btnLeft") {
                 keyboard.LEFT = true;
-            }
-        
+            }        
             if (e.target.id == "btnJump") {
                 keyboard.SPACE = true;
-            }
-        
+            }        
             if (e.target.id == "btnThrow") {
                 keyboard.D = true;
             }
@@ -44,16 +41,13 @@ class Keyboard {
         window.addEventListener("touchend", (e) => {
             if (e.target.id == "btnRight") {
                 keyboard.RIGHT = false;
-            }
-        
+            }        
             if (e.target.id == "btnLeft") {
                 keyboard.LEFT = false;
-            }
-        
+            }        
             if (e.target.id == "btnJump") {
                 keyboard.SPACE = false;
-            }
-        
+            }        
             if (e.target.id == "btnThrow") {
                 keyboard.D = false;
             }
