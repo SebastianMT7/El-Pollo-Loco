@@ -3,13 +3,15 @@ let level1;
 function initLevel() {
     level1 = new Level(
         [
-            new Bottle(320),
-            new Bottle(570),
-            new Bottle(800),
-            new Bottle(1000),
-            new Bottle(1300),
-            new Bottle(1800),
-            new Bottle(2100)
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle(),
+            new Bottle()
         ],
         [
             new Coin(300),
