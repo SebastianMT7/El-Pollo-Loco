@@ -43,6 +43,7 @@ h1 {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
+
 .iconBar {
     position: absolute;
     top: 0;
@@ -112,34 +113,40 @@ footer {
     }
 }
 
-.mobileHud {    
+.mobileHud {
     width: 100%;
     padding: 0 10px 10px 10px;
     position: absolute;
     bottom: 0;
     left: 0;
 
-    img {
-        height: 50px;
-    }
-
-    img:hover{
-        cursor: pointer;
-    }
 }
 
 .hudPosition {
     display: flex;
     justify-content: space-between;
 
-    div{
+    div {
         display: flex;
         gap: 10px;
     }
-    
 }
 
-#deviceNotice{
+.mobileBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 223, 2, 0.0);
+    border: unset;
+    cursor: pointer;
+    height: 36px;
+    
+    img {
+        height: 36px;
+    }
+}
+
+#deviceNotice {
     background-image: url(img/5_background/body_background.jpg);
     position: absolute;
     top: 0;
@@ -152,7 +159,7 @@ footer {
     gap: 100px;
     display: none;
 
-    img{
+    img {
         height: 120px;
     }
 
@@ -166,33 +173,35 @@ footer {
 /********************** Start Responsive *******************/
 
 @media only screen and (max-width:720px) {
+
     .mainContent,
-    .screenBorder, 
-    canvas{
+    .screenBorder,
+    canvas {
         width: 100%;
     }
 
-    h1, 
+    h1,
     .controllBar,
-    footer{
+    footer {
         display: none;
     }
 }
 
 @media only screen and (max-height:480px) {
+
     body,
     .mainContent,
-    .screenBorder, 
+    .screenBorder,
     canvas {
         height: 100vh;
         padding: 0;
         /* overflow-y: hidden; */
     }
 
-    h1, 
+    h1,
     #fullscreen,
-    .controllBar, 
-    footer{
+    .controllBar,
+    footer {
         display: none;
     }
 
@@ -204,6 +213,7 @@ footer {
 }
 
 @media (orientation: portrait) and (max-width: 600px) {
+
     /* orientation: portrait-> Regel die gilt wenn das Gerät in 
     Hochformat gehalten wir (Portrait)*/
     #deviceNotice {
