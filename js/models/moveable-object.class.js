@@ -16,6 +16,9 @@ class MovableObj extends DrawableObj {
         right: 0,
     };
 
+    /**
+     * apply the gravity to character and objects
+     */
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -28,6 +31,10 @@ class MovableObj extends DrawableObj {
         }, 1000 / 25);
     }
 
+    /**
+     * check if the character or the objects are above the ground
+     * @returns true if is above the ground
+     */
     isAboveGround() {
         if ((this instanceof ThrowableObj)) { //throwable Objects should always fall
             return true;
@@ -36,6 +43,11 @@ class MovableObj extends DrawableObj {
         }
     }
 
+    /**
+     * check if objects and enemys colliding with the character
+     * @param {object} mo - the other object to check for collision with
+     * @returns true if objects and enemys are colliding
+     */
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left && // R -> L
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && // B -> T
@@ -43,8 +55,11 @@ class MovableObj extends DrawableObj {
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom; // T -> B
     }
 
+    /**
+     * reduced health by a hit
+     */
     hit() {
-        this.health -= 5;       
+        this.health -= 5;
         if (this.health < 0) {
             this.health = 0;
         } else {
@@ -52,9 +67,12 @@ class MovableObj extends DrawableObj {
         }
         if (this instanceof Endboss) {
             this.health -= 20;
-        } 
+        }
     }
 
+    /**
+     * fills the health of the character
+     */
     recoverHealth() {
         let healthRegen = 20;
         let newHealth = this.health + healthRegen;
@@ -63,34 +81,52 @@ class MovableObj extends DrawableObj {
         } else this.health += 20;
     }
 
+    /**
+     * check if the object is hurt based on the time passed since the last hit.
+     * @returns true if time is passed 
+     */
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; //Differenz in millisekunden
         timePassed = timePassed / 1000; //Differenz in sekunden
         return timePassed < 1;
     }
 
+    /**
+     * check if the object has zero health
+     * @returns true if health is zero
+     */
     isDead() {
         return this.health == 0;
     }
 
+    /**
+     * loads the images from the array to create a animation
+     * @param {array} images - imagearray from the object
+     */
     playAnimation(images) {
-        // zB walk animation
-        let i = this.currentImage % images.length; //zB i= 5 % 6; => 0,Rest 5 (% ist geteilt durch)
-        // i= 7 % 6; => 1,Rest 1 
-        // i = 0,1,2,3,4,5,0,1,2,3,4,5,0
+        let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
     }
 
+    /**
+     * let the object moves right
+     */
     moveRight() {
         this.x += this.speed;
     }
 
+    /**
+     * let the object moves left
+     */
     moveLeft() {
         this.x -= this.speed;
     }
 
+    /**
+     * let the object jump
+     */
     jump() {
         this.speedY = 30;
     }

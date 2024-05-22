@@ -19,7 +19,6 @@ class ChickenSmall extends MovableObj {
         'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ];
 
-
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -29,11 +28,17 @@ class ChickenSmall extends MovableObj {
         this.animate();
     }
 
+    /**
+     * runs the functions to animate the small chickens
+     */
     animate() {
         this.moveChicken();
         this.checkDead();
     }
 
+    /**
+     * animate and move the small chickens
+     */
     moveChicken() {
         this.walkingChicken = setInterval(() => {
             this.moveLeft();
@@ -46,6 +51,9 @@ class ChickenSmall extends MovableObj {
         //allIntervalls.push(this.walkingChickenAnimation);
     }
 
+    /**
+     * handle death small chickens
+     */
     checkDead() {
         this.chickenDeath = setInterval(() => {
             if (this.isDead()) {

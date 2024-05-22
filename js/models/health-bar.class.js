@@ -21,13 +21,20 @@ class HealthBar extends DrawableObj {
         this.setPercentage(100);
     }
 
+    /**
+     * set the correct status bar image
+     * @param {number} percentage - sets the percentage of the bar 
+     */
     setPercentage(percentage) {
-        this.percentage = percentage;//=>0...5
+        this.percentage = percentage; // => 0 ... 5 und erzeugt einen Prozentsatz
         let path = this.IMAGES_LIVE[this.resolveImageIndex()];
         this.img = this.imageCache[path];
         console.log('health',percentage)
     }
 
+    /** 
+     *  @returns the index for percentage image
+     */
     resolveImageIndex() {
         if (this.percentage >= 100) {
             return 5;

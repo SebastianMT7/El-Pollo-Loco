@@ -23,7 +23,9 @@ class Bottle extends MovableObj {
         this.animate();
         //console.log('Bottle X',this.x);
     }
-
+/**
+ * animate the bottles on the ground
+ */
     animate() {
         setInterval(() => { 
             this.playAnimation(this.IMAGES_GROUND);

@@ -8,11 +8,11 @@ class Coin extends MovableObj {
     height = 80;
     width = 80;
     offset = {
-		top: 20,
-		bottom: 20,
-		left: 20,
-		right: 20,
-	};
+        top: 20,
+        bottom: 20,
+        left: 20,
+        right: 20,
+    };
 
     constructor(x) {
         super().loadImage('img/8_coin/coin_1.png');
@@ -22,6 +22,9 @@ class Coin extends MovableObj {
         this.animate();
     }
 
+    /**
+     * animate the coins
+     */
     animate() {
         setInterval(() => { //%(modulul) ist die bezeichnunge für den mathematischen Rest
             this.playAnimation(this.IMAGES_GROUND);

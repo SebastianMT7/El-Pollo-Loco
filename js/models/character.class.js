@@ -91,11 +91,17 @@ class Character extends MovableObj {
         this.animate();
     }
 
+    /**
+     * runs the functions to animate the character
+     */
     animate() {
         this.moveCharacter();
         this.animateCharakter();
     }
 
+    /**
+     * move the character
+     */
     moveCharacter() {
         this.moveChar = setInterval(() => {
             this.walk_sound.pause();
@@ -118,6 +124,9 @@ class Character extends MovableObj {
         //allIntervalls.push(this.moveChar);
     }
 
+    /**
+     * animate character
+     */
     animateCharakter() {
         this.animateChar = setInterval(() => {
             if (this.isHurt()) {
@@ -125,8 +134,10 @@ class Character extends MovableObj {
                 this.hurt_sound.play();
             } else if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                this.walk_sound.pause();
                 loseGame();
             } else if (this.isAboveGround()) {
+                //console.log('char Y' , this.y)
                 this.updateMoveTime();
                 this.playAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
@@ -156,6 +167,9 @@ class Character extends MovableObj {
         return passedTime > 8000;
     }
 
+    /**
+     * let the character jump
+     */
     jump() {
         this.speedY = 30;
     }

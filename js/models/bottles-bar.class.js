@@ -20,14 +20,20 @@ class BottlesBar extends DrawableObj {
         this.height = 60;
         this.setPercentage(0);
     }
-
+/**
+ * set the correct status bar image
+ * @param {number} percentage - sets the percentage of the bar  
+ */
     setPercentage(percentage) {
-        this.percentage = percentage;//=>0...5
+        this.percentage = percentage;
         let path = this.IMAGES_BOTTLES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
-        console.log('percentage',percentage)
+        //console.log('percentage',percentage)
     }
     
+    /** 
+     *  @returns the index for percentage image
+     */
     resolveImageIndex() {
         if (this.percentage >= 100) {
             return 5;

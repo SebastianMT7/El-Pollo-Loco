@@ -62,6 +62,9 @@ class Endboss extends MovableObj {
         this.animateEndboss();
     }
 
+    /**
+     * animate Endboss and shows win Screen if the endboss is death
+     */
     animateEndboss() {
        this.animateBoss =  setInterval(() => {
             if (this.isHurt() && !this.isDead()) {
@@ -81,6 +84,9 @@ class Endboss extends MovableObj {
         //allIntervalls.push(this.animateBoss);
     }
 
+    /**
+     * let the boss walking on the first contact
+     */
     bossAppears() {
         this.bossAppear_sound.play();
         this.playAnimation(this.IMAGES_WALK);

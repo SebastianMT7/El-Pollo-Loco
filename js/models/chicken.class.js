@@ -17,8 +17,6 @@ class Chicken extends MovableObj {
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ];
 
-
-
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -28,13 +26,20 @@ class Chicken extends MovableObj {
         this.height = 80 + this.multiplier;
         this.speed = 0.15 + Math.random() * 0.5; //Math.Random ist immer eine zufälluge Zahl zwischen 0 und 1 deshalb  *0,25
         this.animate();
+        console.log('chicken Y' , this.y)
     }
 
+    /**
+     * runs the functions to animate the chickens
+     */
     animate() {
         this.moveChicken();
         this.checkDead();
     }
 
+    /**
+     * animate and move the chickens
+     */
     moveChicken() {
         this.walkingChicken = setInterval(() => {
             this.moveLeft();
@@ -47,6 +52,9 @@ class Chicken extends MovableObj {
         allIntervalls.push(this.walkingChickenAnimation);
     }
 
+    /**
+     * handle death chickens
+     */
     checkDead() {
         this.chickenDeath = setInterval(() => {
             if (this.isDead()) {

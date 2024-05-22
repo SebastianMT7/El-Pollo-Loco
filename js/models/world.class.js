@@ -36,10 +36,16 @@ class World {
         this.run();
     }
 
+    /**
+     * create the world for the character
+     */
     setWorld() {
         this.character.world = this;
     }
 
+    /**
+     * runs the gamelogic
+     */
     run() {
         setInterval(() => { this.checkCollisions(); }, 60);
         setInterval(() => { this.checkCollisionThrowableObj(); }, 1000 / 20);
@@ -47,6 +53,10 @@ class World {
         setInterval(() => { this.checkCoinsReward(); }, 1000 / 20);
     }
 
+    /**
+     * check if bottles available and creates a new throwableObject (flying bottle)
+     * adjust the bottles inventory and the bottles bar
+     */
     checkThrowBottle() {
         const currentThrowTime = new Date().getTime();
         if (this.keyboard.D && this.bottlesInventory > 0 && currentThrowTime - this.lastThrowTime >= 750) {
@@ -58,6 +68,9 @@ class World {
         }
     }
 
+    /**
+     * runs all collisons with the character
+     */
     checkCollisions() {
         this.collisionEnemie();
         this.collisionEndboss();
@@ -65,12 +78,19 @@ class World {
         this.collisionBottles();
     }
 
+    /**
+     * runs all collisons with the throwable Object (flying bottle)
+     */
     checkCollisionThrowableObj() {
         this.checkBottleCollideWithEnemy();
         this.checkBottleCollideWithEndboss();
         this.checkBottleCollideWithGround();
     }
 
+    /**
+     * check collisions between throwable objects and enemies and handles them
+     * 
+     */
     checkBottleCollideWithEnemy() {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
@@ -88,6 +108,10 @@ class World {
         });
     }
 
+    /**
+     * check collisions between throwable objects and the endboss and handles them
+     * 
+     */
     checkBottleCollideWithEndboss() {
         this.throwableObjects.forEach((bottle) => {
             if (bottle.isColliding(this.endboss) && !bottle.isExploded) {
@@ -104,6 +128,10 @@ class World {
         });
     }
 
+    /**
+     * check collision between throwable objects and ground and hanldes them
+     * 
+     */
     checkBottleCollideWithGround() {
         this.throwableObjects.forEach(bottle => {
             if (bottle.y > 374) {
@@ -116,6 +144,11 @@ class World {
         });
     }
 
+    /**
+     * check if character collide with enemy
+     * handle if the character get hurt or kill the enemy
+     * adjust the character health bar
+     */
     collisionEnemie() {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
@@ -132,6 +165,10 @@ class World {
         });
     }
 
+    /**
+     * delete the enemy from the game
+     * @param {object} enemy - the correct enemy of the array
+     */
     deleteEnemy(enemy) {
         //console.log('chicken death', enemy)
         enemy.health = 0;
@@ -141,6 +178,10 @@ class World {
         }, 1500);
     }
 
+    /**
+     * check if the character collide with the endboss
+     * adjust the character health bar
+     */
     collisionEndboss() {
         if (this.character.isColliding(this.endboss)) {
             this.character.hit();
@@ -148,6 +189,10 @@ class World {
         }
     }
 
+    /**
+     * check if the character collide with the coins
+     * adjust the coins bar and delete the coins
+     */
     collisionCoins() {
         this.level.coins.forEach(coin => {
             if (this.character.isColliding(coin)) {
@@ -162,16 +207,24 @@ class World {
         });
     }
 
+    /**
+     * check if the coins bar is full (100%)
+     * adjust the coins and the health bar
+     */
     checkCoinsReward() {
         if (this.coinsInventory == 100 && this.character.health < 100) {
             this.coinsInventory = 0;
             this.character.recoverHealth();
             this.coinsBar.setPercentage(this.coinsInventory);
-            this.healthBar.setPercentage(this.character.health);            
+            this.healthBar.setPercentage(this.character.health);
             this.regenHealth_sound.play();
         }
     }
 
+    /**
+     * check if the character collide with the bottles
+     * adjust the bottles bar and delete the bottles
+     */
     collisionBottles() {
         this.level.bottles.forEach(bottle => {
             if (this.character.isColliding(bottle)) {
@@ -186,7 +239,9 @@ class World {
         });
     }
 
-    //draw wird immer wieder ausgeführt
+    /**
+     * draws repeated game objects of the world
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -204,6 +259,9 @@ class World {
         });
     }
 
+    /**
+     * added all animated Objects to the world
+     */
     addLevelObjects() {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
@@ -214,6 +272,9 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
     }
 
+    /**
+     * added all bars to the world
+     */
     addLevelBars() {
         this.addToMap(this.healthBar);
         this.addToMap(this.coinsBar);
@@ -221,6 +282,9 @@ class World {
         this.addBossHealthBar();
     }
 
+    /**
+     * added boss health bar on first contact to the world
+     */
     addBossHealthBar() {
         if (this.character.x >= 2600) {
             this.endboss.firstContact = true;
@@ -230,14 +294,21 @@ class World {
         }
     }
 
-
+    /**
+     * add array of objects to map
+     * @param {array} objects - the array of objects to add to the map
+     */
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
         });
     }
 
-    addToMap(mo) {//mo -> movableObject
+    /**
+     * added moveable objects to the map
+     * @param {object} mo - the object to add to the map (movableObject)
+     */
+    addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
@@ -248,6 +319,10 @@ class World {
         }
     }
 
+    /**
+     * flip image 180 degree
+     * @param {object} mo - movable Object to flip
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -255,6 +330,10 @@ class World {
         mo.x = mo.x * -1;
     }
 
+    /**
+     * flip the image back
+     * @param {object} mo - movable Object to flip
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
