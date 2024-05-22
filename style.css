@@ -186,7 +186,7 @@ footer {
     canvas {
         height: 100vh;
         padding: 0;
-        overflow-y: hidden;
+        /* overflow-y: hidden; */
     }
 
     h1, 
