@@ -313,7 +313,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx)
+        //mo.drawFrame(this.ctx) zeichnet die rechteckige hitbox
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
