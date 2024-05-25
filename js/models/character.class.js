@@ -83,7 +83,7 @@ class Character extends MovableObj {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        
+
         sounds.push(this.walk_sound);
         sounds.push(this.jump_sound);
         sounds.push(this.hurt_sound);
@@ -103,7 +103,7 @@ class Character extends MovableObj {
      * move the character
      */
     moveCharacter() {
-        this.moveChar = setInterval(() => {
+        setInterval(() => {
             this.walk_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
@@ -121,14 +121,13 @@ class Character extends MovableObj {
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
-        //allIntervalls.push(this.moveChar);
     }
 
     /**
      * animate character
      */
     animateCharakter() {
-        this.animateChar = setInterval(() => {
+        setInterval(() => {
             if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
                 this.hurt_sound.play();
@@ -146,18 +145,13 @@ class Character extends MovableObj {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
-            }}, 100);        
-        //allIntervalls.push(this.animateChar);
+            }
+        }, 100);
     }
 
-    // handleIdleAnimations() {
-    //     this.timeSinceLastAction = new Date().getTime() - this.lastAction;
-    //     this.playAnimation(this.timeSinceLastAction > 2000 ? this.IMAGES_IDLE : this.IMAGES_WAITING);
-    // }
-
-/**
- * saves the last time, the character was moving
- */
+    /**
+     * saves the last time, the character was moving
+     */
     updateMoveTime() {
         let currentTime = new Date().getTime();
         this.lastMoveTime = currentTime;

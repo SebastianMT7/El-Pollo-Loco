@@ -170,7 +170,6 @@ class World {
      * @param {object} enemy - the correct enemy of the array
      */
     deleteEnemy(enemy) {
-        //console.log('chicken death', enemy)
         enemy.health = 0;
         setTimeout(() => {
             let index = this.level.enemies.indexOf(enemy);
@@ -196,13 +195,11 @@ class World {
     collisionCoins() {
         this.level.coins.forEach(coin => {
             if (this.character.isColliding(coin)) {
-                if (this.coinsInventory < 100) {
-                    this.coinsInventory += 20;
-                    this.collectCoin_sound.play();
-                    this.coinsBar.setPercentage(this.coinsInventory);
-                    let coinIndex = this.level.coins.indexOf(coin);
-                    this.level.coins.splice(coinIndex, 1);
-                }
+                this.coinsInventory += 20;
+                this.collectCoin_sound.play();
+                this.coinsBar.setPercentage(this.coinsInventory);
+                let coinIndex = this.level.coins.indexOf(coin);
+                this.level.coins.splice(coinIndex, 1);
             }
         });
     }
@@ -212,7 +209,7 @@ class World {
      * adjust the coins and the health bar
      */
     checkCoinsReward() {
-        if (this.coinsInventory == 100 && this.character.health < 100) {
+        if (this.coinsInventory >= 100 && this.character.health < 100) {
             this.coinsInventory = 0;
             this.character.recoverHealth();
             this.coinsBar.setPercentage(this.coinsInventory);

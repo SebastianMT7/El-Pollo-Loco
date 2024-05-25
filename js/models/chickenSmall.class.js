@@ -43,19 +43,17 @@ class ChickenSmall extends MovableObj {
         this.walkingChicken = setInterval(() => {
             this.moveLeft();
         }, 1000 / 60);
-        //allIntervalls.push(this.walkingChicken);
 
         this.walkingChickenAnimation = setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING);
         }, 150);
-        //allIntervalls.push(this.walkingChickenAnimation);
     }
 
     /**
      * handle death small chickens
      */
     checkDead() {
-        this.chickenDeath = setInterval(() => {
+        setInterval(() => {
             if (this.isDead()) {
                 this.loadImage(this.IMAGES_DEAD);
                 clearInterval(this.walkingChicken)
@@ -65,6 +63,5 @@ class ChickenSmall extends MovableObj {
                 }, 500);
             };
         }, 50);
-        //allIntervalls.push(this.chickenDeath);
     }
 }

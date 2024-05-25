@@ -66,7 +66,7 @@ class Endboss extends MovableObj {
      * animate Endboss and shows win Screen if the endboss is death
      */
     animateEndboss() {
-       this.animateBoss =  setInterval(() => {
+       setInterval(() => {
             if (this.isHurt() && !this.isDead()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isDead()) {
@@ -81,7 +81,6 @@ class Endboss extends MovableObj {
                 this.playAnimation(this.IMAGES_ALERT);
             }
         }, 200);
-        //allIntervalls.push(this.animateBoss);
     }
 
     /**

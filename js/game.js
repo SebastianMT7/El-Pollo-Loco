@@ -3,14 +3,12 @@ let ctx; //abkürzung context
 let world;
 let keyboard = new Keyboard();
 let sounds = [];
-let allIntervalls = [];
+let isMuted = false;
 background_sound = new Audio('audio/background.mp3');
 win_sound = new Audio('audio/win.mp3');
 lose_sound = new Audio('audio/lose.mp3');
 background_sound.loop = true;
 background_sound.volume = 0.1;
-
-//collectBottle_sound = new Audio('audio/collecting_bottle.mp3');
 
 /**
  * starts the game
@@ -22,11 +20,9 @@ function startGame() {
     document.getElementById('loseScreen').classList.add('d-none');
     document.getElementById('iconBar').classList.remove('d-none');
     document.getElementById('mobileHud').classList.remove('d-none')
-    //console.log('Game:', 'start')
     initLevel();
-    initGame();
-    //console.log('my character is', world['character']); //oder world.character
-   
+    initGame();    
+    checkIsMuted();
     this.background_sound.play();
     sounds.push(background_sound);
     sounds.push(win_sound);
@@ -51,10 +47,8 @@ function loseGame() {
     document.getElementById('mobileHud').classList.add('d-none');
     document.getElementById('loseScreen').classList.remove('d-none');
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
-    //clearInterval(this.allIntervalls);
     this.background_sound.pause();
     this.lose_sound.play();
-    // sounds = [];
 }
 
 /**
@@ -66,7 +60,6 @@ function winGame() {
     document.getElementById('mobileHud').classList.add('d-none');
     document.getElementById('winScreen').classList.remove('d-none');
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
-    //clearInterval(this.allIntervalls);
     this.background_sound.pause();
     this.win_sound.play();
 }
@@ -78,18 +71,40 @@ function fullScreen() {
     canvas.requestFullscreen();
 }
 
-function showGameInfos(){
+/**
+ * show the game info box with controls and advises
+ */
+function showGameInfos() {
     document.getElementById('howToPlay').classList.remove('d-none');
 }
 
-function hideGameInfos(){
+/**
+ * hide the game info box with controls and advises
+ */
+function hideGameInfos() {
     document.getElementById('howToPlay').classList.add('d-none');
+}
+
+/**
+ * check if the game is muted
+ */
+function checkIsMuted() {
+    if (isMuted == true) {
+        sounds.forEach(sound => {
+            sound.muted = true;
+        });
+    } else if (isMuted == false){
+        sounds.forEach(sound => {
+            sound.muted = false;
+        });
+    }
 }
 
 /**
  * turns the game sound off
  */
 function soundOff() {
+    isMuted = true;
     document.getElementById('soundOn').classList.add('d-none');
     document.getElementById('soundOff').classList.remove('d-none');
     sounds.forEach(sound => {
@@ -101,6 +116,7 @@ function soundOff() {
  * turns the game sound on
  */
 function soundOn() {
+    isMuted = false;
     document.getElementById('soundOff').classList.add('d-none');
     document.getElementById('soundOn').classList.remove('d-none');
     sounds.forEach(sound => {
