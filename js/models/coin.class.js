@@ -26,7 +26,7 @@ class Coin extends MovableObj {
      * animate the coins
      */
     animate() {
-        setInterval(() => { //%(modulul) ist die bezeichnunge für den mathematischen Rest
+        setInterval(() => { 
             this.playAnimation(this.IMAGES_GROUND);
         }, 500);
     }

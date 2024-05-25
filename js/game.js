@@ -1,5 +1,5 @@
 let canvas;
-let ctx; //abkürzung context
+let ctx; 
 let world;
 let keyboard = new Keyboard();
 let sounds = [];

@@ -36,7 +36,7 @@ class MovableObj extends DrawableObj {
      * @returns true if is above the ground
      */
     isAboveGround() {
-        if ((this instanceof ThrowableObj)) { //throwable Objects should always fall
+        if ((this instanceof ThrowableObj)) { 
             return true;
         } else {
             return this.y < 72;
@@ -49,10 +49,10 @@ class MovableObj extends DrawableObj {
      * @returns true if objects and enemys are colliding
      */
     isColliding(mo) {
-        return this.x + this.width - this.offset.right > mo.x + mo.offset.left && // R -> L
-            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && // B -> T
-            this.x + this.offset.left < mo.x + mo.width - mo.offset.right && // L -> R
-            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom; // T -> B
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&  
+            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top && 
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right && 
+            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
     /**
@@ -86,8 +86,8 @@ class MovableObj extends DrawableObj {
      * @returns true if time is passed 
      */
     isHurt() {
-        let timePassed = new Date().getTime() - this.lastHit; //Differenz in millisekunden
-        timePassed = timePassed / 1000; //Differenz in sekunden
+        let timePassed = new Date().getTime() - this.lastHit; 
+        timePassed = timePassed / 1000; 
         return timePassed < 1;
     }
 

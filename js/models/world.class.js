@@ -23,7 +23,7 @@ class World {
 
 
     constructor(canvas, keyboard) {
-        this.ctx = canvas.getContext('2d');//bewirkt das hinzufügen im canvas (in 2D style)
+        this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
         sounds.push(this.collectBottle_sound);
@@ -252,7 +252,7 @@ class World {
 
         let self = this;
         requestAnimationFrame(function () {
-            self.draw(); //self wird erstellt, weil er hier (warum auch immer) .this nicht kennt
+            self.draw();
         });
     }
 
@@ -310,7 +310,6 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        //mo.drawFrame(this.ctx) zeichnet die rechteckige hitbox
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }

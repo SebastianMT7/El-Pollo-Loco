@@ -26,7 +26,7 @@ class CoinsBar extends DrawableObj {
      * @param {number} percentage - sets the percentage of the bar  
      */
     setPercentage(percentage) {
-        this.percentage = percentage;//=>0...5 und erzeugt einen Prozentsatz
+        this.percentage = percentage;
         let path = this.IMAGES_COINS[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }

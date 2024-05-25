@@ -12,7 +12,7 @@ class DrawableObj {
      * @param {string} path - The path of the image
      */
     loadImage(path) {
-        this.img = new Image(); //this.img = document.getElemtByID('image') <img id="image">
+        this.img = new Image(); 
         this.img.src = path;
     }
 
