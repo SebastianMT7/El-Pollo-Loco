@@ -10,6 +10,8 @@ lose_sound = new Audio('audio/lose.mp3');
 background_sound.loop = true;
 background_sound.volume = 0.1;
 
+collectBottle_sound = new Audio('audio/collecting_bottle.mp3');
+
 /**
  * starts the game
  * shows and hides nedded screens
@@ -24,9 +26,11 @@ function startGame() {
     initLevel();
     initGame();
     //console.log('my character is', world['character']); //oder world.character
-    //resetGameWorldContent(); -> benötigt?
+   
     this.background_sound.play();
     sounds.push(background_sound);
+    sounds.push(win_sound);
+    sounds.push(lose_sound);
 }
 
 /**
@@ -37,10 +41,6 @@ function initGame() {
     canvas.classList.remove('d-none');
     world = new World(canvas, keyboard);
 }
-
-// function resetGameWorldContent() {
-//     world.throwableObjects = []; //benötigt??
-// }
 
 /**
  * shows lose screen and resets the world
@@ -54,7 +54,7 @@ function loseGame() {
     //clearInterval(this.allIntervalls);
     this.background_sound.pause();
     this.lose_sound.play();
-    sounds = [];
+    // sounds = [];
 }
 
 /**
@@ -76,6 +76,14 @@ function winGame() {
  */
 function fullScreen() {
     canvas.requestFullscreen();
+}
+
+function showGameInfos(){
+    document.getElementById('howToPlay').classList.remove('d-none');
+}
+
+function hideGameInfos(){
+    document.getElementById('howToPlay').classList.add('d-none');
 }
 
 /**
