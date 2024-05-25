@@ -10,7 +10,7 @@ lose_sound = new Audio('audio/lose.mp3');
 background_sound.loop = true;
 background_sound.volume = 0.1;
 
-collectBottle_sound = new Audio('audio/collecting_bottle.mp3');
+//collectBottle_sound = new Audio('audio/collecting_bottle.mp3');
 
 /**
  * starts the game
@@ -21,7 +21,7 @@ function startGame() {
     document.getElementById('winScreen').classList.add('d-none');
     document.getElementById('loseScreen').classList.add('d-none');
     document.getElementById('iconBar').classList.remove('d-none');
-    document.getElementById('mobileHud').classList.remove('d-none');
+    document.getElementById('mobileHud').classList.remove('d-none')
     //console.log('Game:', 'start')
     initLevel();
     initGame();

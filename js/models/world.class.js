@@ -152,7 +152,7 @@ class World {
     collisionEnemie() {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
-                if (this.character.isAboveGround()) {
+                if (this.character.isAboveGround() && this.character.speedY <= 0) {
                     this.cackle_sound.play();
                     this.deleteEnemy(enemy);
                     this.character.jump();

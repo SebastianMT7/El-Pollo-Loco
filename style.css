@@ -71,14 +71,17 @@ h1 {
     gap: 50px;
     justify-content: center;
 
-    div {
+    div, span {
         font-size: 42px;
         color: #FFCC00;
         letter-spacing: 2px;
+    }
+
+    span{
         filter: drop-shadow(5px 5px 5px #222);
     }
 
-    div:hover {
+    div:hover, span:hover {
         cursor: pointer;
         transform: scale(1.1);
     }
@@ -161,7 +164,6 @@ footer {
     position: absolute;
     bottom: 0;
     left: 0;
-
 }
 
 .hudPosition {
@@ -180,7 +182,6 @@ footer {
     justify-content: center;
     background-color: rgba(255, 223, 2, 0.0);
     border: unset;
-    cursor: pointer;
     height: 36px;
     
     img {
@@ -252,6 +253,7 @@ footer {
     #loseScreen {
         height: 100%;
     }
+    
 }
 
 @media (orientation: portrait) and (max-width: 600px) {

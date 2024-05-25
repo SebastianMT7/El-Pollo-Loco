@@ -31,7 +31,6 @@ class Keyboard {
         window.addEventListener("touchstart", (e) => {
             if (e.target.id == "btnRight") {
                 keyboard.RIGHT = true;
-                console.log('touchRight', 'touch')
             }
             if (e.target.id == "btnLeft") {
                 keyboard.LEFT = true;

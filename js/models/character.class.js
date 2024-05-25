@@ -83,7 +83,7 @@ class Character extends MovableObj {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-
+        
         sounds.push(this.walk_sound);
         sounds.push(this.jump_sound);
         sounds.push(this.hurt_sound);
@@ -137,7 +137,6 @@ class Character extends MovableObj {
                 this.walk_sound.pause();
                 loseGame();
             } else if (this.isAboveGround()) {
-                //console.log('char Y' , this.y)
                 this.updateMoveTime();
                 this.playAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
@@ -156,12 +155,18 @@ class Character extends MovableObj {
     //     this.playAnimation(this.timeSinceLastAction > 2000 ? this.IMAGES_IDLE : this.IMAGES_WAITING);
     // }
 
-
+/**
+ * saves the last time, the character was moving
+ */
     updateMoveTime() {
         let currentTime = new Date().getTime();
         this.lastMoveTime = currentTime;
     }
 
+    /**
+     * calculate the passed time after last move of the Character
+     * @returns true if passed time is over 8sek
+     */
     sleepTime() {
         let passedTime = new Date().getTime() - this.lastMoveTime;
         return passedTime > 8000;
