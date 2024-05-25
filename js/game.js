@@ -65,6 +65,18 @@ function winGame() {
 }
 
 /**
+ * stops the game and shows the start screen
+ */
+function backToMenu(){
+    document.getElementById('canvas').classList.add('d-none');
+    document.getElementById('iconBar').classList.add('d-none');
+    document.getElementById('mobileHud').classList.add('d-none');
+    document.getElementById('startScreen').classList.remove('d-none');
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    this.background_sound.pause();
+}
+
+/**
  * shows the game on fullscreen of the display
  */
 function fullScreen() {
