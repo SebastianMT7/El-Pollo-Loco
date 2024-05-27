@@ -258,6 +258,12 @@ footer {
 
 }
 
+@media only screen and (max-height:400px) {
+    .gameInfos {
+        font-size: 20px;
+    }
+}
+
 @media (orientation: portrait) and (max-width: 600px) {
 
     /* orientation: portrait-> Regel die gilt wenn das Gerät in 
