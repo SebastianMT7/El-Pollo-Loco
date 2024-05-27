@@ -1,5 +1,5 @@
 let canvas;
-let ctx; 
+let ctx;
 let world;
 let keyboard = new Keyboard();
 let sounds = [];
@@ -20,9 +20,11 @@ function startGame() {
     document.getElementById('loseScreen').classList.add('d-none');
     document.getElementById('iconBar').classList.remove('d-none');
     document.getElementById('mobileHud').classList.remove('d-none')
+    
     initLevel();
-    initGame();    
+    initGame();
     checkIsMuted();
+    checkMobileDevice();
     this.background_sound.play();
     sounds.push(background_sound);
     sounds.push(win_sound);
@@ -67,7 +69,7 @@ function winGame() {
 /**
  * stops the game and shows the start screen
  */
-function backToMenu(){
+function backToMenu() {
     document.getElementById('canvas').classList.add('d-none');
     document.getElementById('iconBar').classList.add('d-none');
     document.getElementById('mobileHud').classList.add('d-none');
@@ -105,7 +107,7 @@ function checkIsMuted() {
         sounds.forEach(sound => {
             sound.muted = true;
         });
-    } else if (isMuted == false){
+    } else if (isMuted == false) {
         sounds.forEach(sound => {
             sound.muted = false;
         });
@@ -136,5 +138,22 @@ function soundOn() {
     })
 }
 
+/**
+ * checks if the window resize
+ */
+window.addEventListener('resize', checkMobileDevice)
+
+/**
+ * Checks whether a touch device is being used 
+ * If so displays the mobile input devices
+ */
+function checkMobileDevice() {
+    let canvas = document.getElementById('canvas');
+    if (window.matchMedia("(any-pointer: coarse)").matches && !canvas.classList.contains('d-none')) {
+        document.getElementById('mobileHud').classList.remove('d-none');
+    } else {
+        document.getElementById('mobileHud').classList.add('d-none');
+    }
+}
 
 

@@ -47,7 +47,7 @@ class World {
      * runs the gamelogic
      */
     run() {
-        setInterval(() => { this.checkCollisions(); }, 60);
+        setInterval(() => { this.checkCollisions(); }, 50);
         setInterval(() => { this.checkCollisionThrowableObj(); }, 1000 / 20);
         setInterval(() => { this.checkThrowBottle(); }, 1000 / 20);
         setInterval(() => { this.checkCoinsReward(); }, 1000 / 20);

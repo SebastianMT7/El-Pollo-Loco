@@ -71,17 +71,19 @@ h1 {
     gap: 50px;
     justify-content: center;
 
-    div, span {
+    div,
+    span {
         font-size: 42px;
         color: #FFCC00;
         letter-spacing: 2px;
     }
 
-    span{
+    span {
         filter: drop-shadow(5px 5px 5px #222);
     }
 
-    div:hover, span:hover {
+    div:hover,
+    span:hover {
         cursor: pointer;
         transform: scale(1.1);
     }
@@ -95,13 +97,13 @@ h1 {
     left: 0;
     right: 0;
     top: 0;
-    bottom: 0;       
+    bottom: 0;
     z-index: 3;
     border-radius: 20px;
-    backdrop-filter: blur(10px); 
+    backdrop-filter: blur(10px);
 }
 
-.gameInfos{
+.gameInfos {
     display: flex;
     flex-direction: column;
     font-size: 25px;
@@ -122,7 +124,7 @@ h2 {
     text-decoration: underline;
 }
 
-.gameAdvises{
+.gameAdvises {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -183,7 +185,7 @@ footer {
     background-color: rgba(255, 223, 2, 0.0);
     border: unset;
     height: 36px;
-    
+
     img {
         height: 36px;
     }
@@ -253,13 +255,13 @@ footer {
     #loseScreen {
         height: 100%;
     }
-    
+
 }
 
 @media (orientation: portrait) and (max-width: 600px) {
 
     /* orientation: portrait-> Regel die gilt wenn das Gerät in 
-    Hochformat gehalten wir (Portrait)*/
+    Hochformat gehalten wird (Portrait)*/
     #deviceNotice {
         display: flex;
     }
