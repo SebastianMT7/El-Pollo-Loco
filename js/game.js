@@ -48,7 +48,7 @@ function loseGame() {
     document.getElementById('iconBar').classList.add('d-none');
     document.getElementById('mobileHud').classList.add('d-none');
     document.getElementById('loseScreen').classList.remove('d-none');
-    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    for (let i = 1; i < 99999; i++) window.clearInterval(i);
     this.background_sound.pause();
     this.lose_sound.play();
 }
@@ -61,7 +61,7 @@ function winGame() {
     document.getElementById('iconBar').classList.add('d-none');
     document.getElementById('mobileHud').classList.add('d-none');
     document.getElementById('winScreen').classList.remove('d-none');
-    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    for (let i = 1; i < 99999; i++) window.clearInterval(i);
     this.background_sound.pause();
     this.win_sound.play();
 }
@@ -74,7 +74,7 @@ function backToMenu() {
     document.getElementById('iconBar').classList.add('d-none');
     document.getElementById('mobileHud').classList.add('d-none');
     document.getElementById('startScreen').classList.remove('d-none');
-    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    for (let i = 1; i < 99999; i++) window.clearInterval(i);
     this.background_sound.pause();
 }
 

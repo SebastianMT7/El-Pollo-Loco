@@ -47,7 +47,7 @@ class World {
      * runs the gamelogic
      */
     run() {
-        setInterval(() => { this.checkCollisions(); }, 50);
+        setInterval(() => { this.checkCollisions(); }, 40);
         setInterval(() => { this.checkCollisionThrowableObj(); }, 1000 / 20);
         setInterval(() => { this.checkThrowBottle(); }, 1000 / 20);
         setInterval(() => { this.checkCoinsReward(); }, 1000 / 20);
@@ -152,6 +152,7 @@ class World {
     collisionEnemie() {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColliding(enemy)) {
+                //console.log('y', enemy.y)
                 if (this.character.isAboveGround() && this.character.speedY <= 0) {
                     this.cackle_sound.play();
                     this.deleteEnemy(enemy);
@@ -283,7 +284,7 @@ class World {
      * added boss health bar on first contact to the world
      */
     addBossHealthBar() {
-        if (this.character.x >= 2600) {
+        if (this.character.x >= 2500) {
             this.endboss.firstContact = true;
         }
         if (this.endboss.firstContact == true) {
